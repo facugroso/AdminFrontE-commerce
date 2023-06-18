@@ -1,0 +1,8 @@
+aside a:hover,
+aside a:hover i {
+  color: #e01637 !important;
+}
+.active a,
+.active a i {
+  color: #e01637 !important;
+}
