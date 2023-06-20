@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
+
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import NavBar from "./Components/NavBar";
@@ -13,22 +13,22 @@ import Login from "./Pages/Login";
 import "./App.css";
 
 function App() {
-  const hideSidebarAndNavBar = window.location.pathname === "/login";
-
-  useEffect(() => {}, []);
+  const location = useLocation();
+  const hideComponents = ["/login"];
+  const hideSidebarAndNavBar = !hideComponents.includes(location.pathname);
 
   return (
     <>
       <div id="App" className="d-flex align-items-stretch">
-        {!hideSidebarAndNavBar && <SideBar />}
+        {hideSidebarAndNavBar && <SideBar />}
         <main id="main">
-          {!hideSidebarAndNavBar && <NavBar />}
+          {hideSidebarAndNavBar && <NavBar />}
           <Routes>
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
             <Route path="/users" element={<Users />} />
             <Route path="/products" element={<Products />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
       </div>

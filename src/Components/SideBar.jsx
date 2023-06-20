@@ -65,7 +65,7 @@ function SideBar() {
         </li>
       </ul>
       <hr className="px-2 py-3" />
-      <Link to="/login" className="nav-link text-white">
+      <Link to="/login" className="nav-link text-white ps-3">
         <i
           className="bi bi-box-arrow-right me-2"
           style={{ color: "#ffffff", fontSize: "20px" }}
