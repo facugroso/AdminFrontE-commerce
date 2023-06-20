@@ -1,0 +1,11 @@
+#login_box {
+  margin: 5% auto;
+  max-width: 400px;
+}
+#login_box img {
+  width: 40%;
+  margin: 0 auto;
+}
+#login_box h2 {
+  font-size: 26px;
+}

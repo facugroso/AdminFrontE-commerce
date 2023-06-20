@@ -5,8 +5,12 @@ function Products() {
     <section className="container w-100">
       <div className="d-flex justify-content-between">
         <h2>Products</h2>
+
         <div>
-          <Link to="/orders" className="btn btn-danger" role="button">
+          <Link to="/" className="btn btn-danger me-2" role="button">
+            Add Category
+          </Link>
+          <Link to="/" className="btn btn-danger" role="button">
             Add Product
           </Link>
         </div>
@@ -16,6 +20,7 @@ function Products() {
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
+            <th scope="col">Category</th>
             <th scope="col">Price</th>
             <th scope="col">Stock</th>
             <th scope="col"></th>
@@ -25,6 +30,7 @@ function Products() {
           <tr>
             <th scope="row">1</th>
             <td>HyperX Cloud III - Gaming Headset </td>
+            <td>Gaming Headsets</td>
             <td>$99.99</td>
             <td>100</td>
             <td>

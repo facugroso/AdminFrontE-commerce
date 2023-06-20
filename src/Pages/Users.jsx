@@ -15,7 +15,6 @@ function Users() {
         <thead>
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">Avatar</th>
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
             <th scope="col">Admin</th>
@@ -25,12 +24,7 @@ function Users() {
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>
-              <i
-                className="bi bi-person-circle"
-                style={{ fontSize: "30px" }}
-              ></i>
-            </td>
+
             <td>Mark Otto</td>
             <td>markotto@email.com</td>
             <td>
@@ -47,12 +41,7 @@ function Users() {
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>
-              <i
-                className="bi bi-person-circle"
-                style={{ fontSize: "30px" }}
-              ></i>
-            </td>
+
             <td>Jacob Thornton</td>
             <td>jacobthornton@email.com</td>
             <td>
