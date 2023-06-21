@@ -1,6 +1,33 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Products() {
+  const [products, setProducts] = useState();
+  const [categories, setCategories] = useState();
+
+  useEffect(() => {
+    async function getCategories() {
+      const res = await axios({
+        method: "get",
+        url: `http://localhost:3000/categories`,
+      });
+      setCategories(res.data);
+    }
+    getCategories();
+  }, []);
+
+  useEffect(() => {
+    async function getProducts() {
+      const res = await axios({
+        method: "get",
+        url: `http://localhost:3000/products`,
+      });
+      setProducts(res.data);
+    }
+    getProducts();
+  }, []);
+
   return (
     <section className="container w-100">
       <div className="d-flex justify-content-between">
@@ -27,18 +54,38 @@ function Products() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>HyperX Cloud III - Gaming Headset </td>
-            <td>Gaming Headsets</td>
-            <td>$99.99</td>
-            <td>100</td>
-            <td>
-              <Link to="#" className="text-decoration-none">
-                Edit
-              </Link>
-            </td>
-          </tr>
+          {products && (
+            <>
+              {products.map((item) => (
+                <>
+                  <tr>
+                    <th scope="row">{item.id}</th>
+                    <td>{item.name}</td>
+                    <td>
+                      <>
+                        {categories.map((category) => {
+                          return (
+                            <>
+                              {item.categoryId === category.id && (
+                                <>{category.name}</>
+                              )}
+                            </>
+                          );
+                        })}
+                      </>
+                    </td>
+                    <td>{item.price}</td>
+                    <td>{item.stock}</td>
+                    <td>
+                      <Link to="#" className="text-decoration-none">
+                        Edit
+                      </Link>
+                    </td>
+                  </tr>
+                </>
+              ))}
+            </>
+          )}
         </tbody>
       </table>
     </section>
