@@ -52,6 +52,15 @@ function SideBar() {
             Users
           </Link>
         </li>
+        <li className={isActivePath("/categories")}>
+          <Link to="/categories" className="nav-link text-white">
+            <i
+              className="bi bi-grid me-2"
+              style={{ color: "#ffffff", fontSize: "20px" }}
+            ></i>
+            Categories
+          </Link>
+        </li>
         <li className={isActivePath("/products")}>
           <Link to="/products" className="nav-link text-white">
             <i

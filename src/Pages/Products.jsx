@@ -34,9 +34,6 @@ function Products() {
         <h2>Products</h2>
 
         <div>
-          <Link to="/" className="btn btn-danger me-2" role="button">
-            Add Category
-          </Link>
           <Link to="/products/add" className="btn btn-danger" role="button">
             Add Product
           </Link>
