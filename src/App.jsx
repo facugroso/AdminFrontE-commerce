@@ -11,6 +11,7 @@ import Orders from "./Pages/Orders";
 import Login from "./Pages/Login";
 import AddProduct from "./Components/AddProduct";
 import Categories from "./Pages/Categories";
+import EditProduct from "./Components/EditProduct";
 
 import "./App.css";
 
@@ -29,8 +30,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
             <Route path="/users" element={<Users />} />
-            <Route path="/products/add" element={<AddProduct />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/products/add" element={<AddProduct />} />
+            <Route path="/products/:slug" element={<EditProduct />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/categories" element={<Categories />} />
           </Routes>
