@@ -1,11 +1,8 @@
 #form_box {
-  margin: 10% auto;
+  margin: 3% auto;
   max-width: 700px;
 }
-#form_box img {
-  width: 40%;
-  margin: 0 auto;
-}
+
 #form_box h2 {
   font-size: 26px;
 }
