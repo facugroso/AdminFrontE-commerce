@@ -8,22 +8,22 @@ function Products() {
 
   useEffect(() => {
     async function getCategories() {
-      const res = await axios({
+      const response = await axios({
         method: "get",
         url: `http://localhost:3000/categories`,
       });
-      setCategories(res.data);
+      setCategories(response.data);
     }
     getCategories();
   }, []);
 
   useEffect(() => {
     async function getProducts() {
-      const res = await axios({
+      const response = await axios({
         method: "get",
         url: `http://localhost:3000/products`,
       });
-      setProducts(res.data);
+      setProducts(response.data);
     }
     getProducts();
   }, []);
@@ -37,7 +37,7 @@ function Products() {
           <Link to="/" className="btn btn-danger me-2" role="button">
             Add Category
           </Link>
-          <Link to="/" className="btn btn-danger" role="button">
+          <Link to="/products/add" className="btn btn-danger" role="button">
             Add Product
           </Link>
         </div>
@@ -54,7 +54,7 @@ function Products() {
           </tr>
         </thead>
         <tbody>
-          {products && (
+          {products && categories && (
             <>
               {products.map((item) => (
                 <>
