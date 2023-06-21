@@ -79,8 +79,11 @@ function Users() {
               )}
             </h2>
             <div>
-              <Link to="/orders" className="btn btn-danger" role="button">
-                Add Users
+              <Link to="/" className="btn btn-danger me-2" role="button">
+                Add Admin
+              </Link>
+              <Link to="/" className="btn btn-danger" role="button">
+                Add User
               </Link>
             </div>
           </div>
@@ -90,7 +93,6 @@ function Users() {
                 <th scope="col">Id</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Admin</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -104,12 +106,6 @@ function Users() {
                       {userInfo.firstname} {userInfo.lastname}
                     </td>
                     <td>{userInfo.email}</td>
-                    <td>
-                      <i
-                        className="bi bi-x-circle "
-                        style={{ color: "#dc3545" }}
-                      ></i>
-                    </td>
                     <td>
                       <Link to="#" className="text-decoration-none">
                         Edit
@@ -127,12 +123,6 @@ function Users() {
                       {admin.firstname} {admin.lastname}
                     </td>
                     <td>{admin.email}</td>
-                    <td>
-                      <i
-                        className="bi bi-check-circle"
-                        style={{ color: "#198754" }}
-                      ></i>
-                    </td>
                     <td>
                       <Link to="#" className="text-decoration-none">
                         Edit
