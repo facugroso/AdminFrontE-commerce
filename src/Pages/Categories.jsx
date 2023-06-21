@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -10,7 +10,6 @@ function Categories() {
   const [categories, setCategories] = useState();
   const [show, setShow] = useState(false);
 
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [category, setCategory] = useState("");
   const [categoryimg, setCategoryimg] = useState("");
@@ -21,21 +20,13 @@ function Categories() {
       method: "POST",
       url: "http://localhost:3000/category",
       headers: {
-        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${user.token}`,
       },
       data: {
-        name: productName,
-        descriptionTitle: descriptionTitle,
-        description: description,
-        stock: stock,
+        name: category,
+        image: categoryimg,
       },
     });
-    dispatch(addProduct(response.data));
-    setProductname("");
-    setShortDescriptionTitle("");
-    setDescription("");
-    setStock("");
   }
 
   const handleClose = () => setShow(false);
