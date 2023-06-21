@@ -1,6 +1,7 @@
-import { useState } from "react";
-import addProduct from "../redux/productSlice";
+import { useState, useEffect } from "react";
+import { addProduct } from "../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./AddProduct.css";
 import axios from "axios";
 
@@ -11,21 +12,48 @@ function AddProduct() {
   const [descriptionTitle, setShortDescriptionTitle] = useState("");
   const [description, setDescription] = useState("");
   const [stock, setStock] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const [gallery, setGallery] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [trending, setTrending] = useState("");
+  const [features, setFeatures] = useState("");
+
+  const navigate = useNavigate();
+
+  const [categories, setCategories] = useState();
+
+  useEffect(() => {
+    async function getCategories() {
+      const response = await axios({
+        method: "get",
+        url: `http://localhost:3000/categories`,
+      });
+      setCategories(response.data);
+    }
+    getCategories();
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", productName);
+    formData.append("descriptionTitle", descriptionTitle);
+    formData.append("description", description);
+    formData.append("stock", stock);
+    formData.append("price", price);
+    formData.append("image", image);
+    formData.append("gallery", gallery);
+    formData.append("categoryId", categoryId.toString());
+    formData.append("trending", trending);
+    formData.append("features", features);
     const response = await axios({
       method: "POST",
       url: "http://localhost:3000/products",
+      data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${user.token}`,
-      },
-      data: {
-        name: productName,
-        descriptionTitle: descriptionTitle,
-        description: description,
-        stock: stock,
       },
     });
     dispatch(addProduct(response.data));
@@ -33,11 +61,12 @@ function AddProduct() {
     setShortDescriptionTitle("");
     setDescription("");
     setStock("");
+    navigate("/products");
   }
 
   return (
     <>
-      <div id="form_box" className="bg-dark">
+      <div id="form_box" className="bg-dark mb-5">
         <div className="p-3 shadow-lg rounded">
           <div>
             <h2 className="text-white">New Product</h2>
@@ -86,6 +115,19 @@ function AddProduct() {
             </div>
 
             <div className="form-group mb-3">
+              <label className="text-white" htmlFor="features">
+                Features
+              </label>
+              <input
+                type="text"
+                className="form-control form-control-sm bg-light"
+                name="features"
+                value={features}
+                onChange={(event) => setFeatures(event.target.value)}
+              />
+            </div>
+
+            <div className="form-group mb-3">
               <label className="text-white" htmlFor="stock">
                 Stock
               </label>
@@ -96,6 +138,92 @@ function AddProduct() {
                 value={stock}
                 onChange={(event) => setStock(event.target.value)}
               />
+            </div>
+
+            <div className="form-group mb-3">
+              <label className="text-white" htmlFor="price">
+                Unit Price
+              </label>
+              <input
+                type="number"
+                className="form-control form-control-sm bg-light"
+                name="price"
+                value={price}
+                onChange={(event) => setPrice(event.target.value)}
+              />
+            </div>
+
+            <div className="input-group mb-3 d-flex flex-column">
+              <div>
+                <label className="text-white" htmlFor="categoryId">
+                  Category
+                </label>
+              </div>
+              <select
+                className="form-select w-100 rounded"
+                id="categoryId"
+                aria-label="Example select with button addon"
+                onChange={(event) => setCategoryId(event.target.value)}
+              >
+                <option disabled selected>
+                  Select a category
+                </option>
+                {categories && (
+                  <>
+                    {categories.map((category) => (
+                      <>
+                        <option value={category.id}>{category.name}</option>
+                      </>
+                    ))}
+                  </>
+                )}
+              </select>
+            </div>
+
+            <div className="form-group mb-3">
+              <label htmlFor="image" className="form-label text-white">
+                Main image
+              </label>
+              <input
+                className="form-control"
+                type="file"
+                name="image"
+                id="image"
+                onChange={(event) => setImage(event.target.files[0])}
+              />
+            </div>
+
+            <div className="form-group mb-3">
+              <label htmlFor="gallery" className="form-label text-white">
+                Gallery
+              </label>
+              <input
+                className="form-control"
+                type="file"
+                name="gallery"
+                id="gallery"
+                onChange={(event) => setGallery(event.target.files[0])}
+              />
+            </div>
+
+            <div className="input-group mb-3 d-flex flex-column">
+              <div>
+                <label className="text-white" htmlFor="trending">
+                  Trending
+                </label>
+              </div>
+              <select
+                className="form-select w-100 rounded"
+                id="trending"
+                aria-label="Example select with button addon"
+                onChange={(event) => setTrending(event.target.value)}
+              >
+                <option disabled selected>
+                  Trending item
+                </option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
             </div>
 
             <div className="mt-4 mb-3 text-center">

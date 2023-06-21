@@ -6,3 +6,7 @@ aside a:hover i {
 .active a i {
   color: #e01637 !important;
 }
+
+.sidebar-style {
+  width: 15rem;
+}

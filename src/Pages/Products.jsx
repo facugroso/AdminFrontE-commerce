@@ -51,7 +51,7 @@ function Products() {
           </tr>
         </thead>
         <tbody>
-          {products && categories && (
+          {products && categories ? (
             <>
               {products.map((item) => (
                 <>
@@ -82,6 +82,10 @@ function Products() {
                 </>
               ))}
             </>
+          ) : (
+            <div>
+              <h1>...Loading</h1>
+            </div>
           )}
         </tbody>
       </table>
