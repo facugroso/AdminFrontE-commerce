@@ -1,4 +1,27 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import axios from "axios";
+
 function Orders() {
+  const user = useSelector((state) => state.user);
+
+  const [orders, setOrders] = useState();
+
+  useEffect(() => {
+    async function setOrders() {
+      const response = await axios({
+        method: "get",
+        url: `http://localhost:3000/orders`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      setOrders(response.data);
+    }
+    setOrders();
+  }, []);
   return (
     <section className="container w-100">
       <h2>Orders</h2>
