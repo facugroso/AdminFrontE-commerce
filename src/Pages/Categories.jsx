@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCategory } from "../redux/categorySlice";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -10,47 +11,61 @@ function Categories() {
   const [categories, setCategories] = useState();
   const [show, setShow] = useState(false);
 
-  const user = useSelector((state) => state.user);
   const [category, setCategory] = useState("");
   const [categoryimg, setCategoryimg] = useState("");
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const response = await axios({
-      method: "POST",
-      url: "http://localhost:3000/category",
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-      data: {
-        name: category,
-        image: categoryimg,
-      },
-    });
-  }
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  async function getCategories() {
+    console.log("boop");
+    const response = await axios({
+      method: "get",
+      url: `http://localhost:3000/categories`,
+    });
+
+    const categoriesData = response.data.map((category) => ({
+      ...category,
+      name: category.name.toLowerCase().replace(/^\w/, (c) => c.toUpperCase()),
+    }));
+
+    setCategories(categoriesData);
+  }
+
   useEffect(() => {
-    async function getCategories() {
-      const response = await axios({
-        method: "get",
-        url: `http://localhost:3000/categories`,
-      });
-
-      const categoriesData = response.data.map((category) => ({
-        ...category,
-        name: category.name
-          .toLowerCase()
-          .replace(/^\w/, (c) => c.toUpperCase()),
-      }));
-
-      setCategories(categoriesData);
-      console.log(response.data);
-    }
     getCategories();
   }, []);
+
+  async function handleSubmit() {
+    const parseCategory = category.toUpperCase();
+
+    const response = await axios({
+      method: "POST",
+      url: "http://localhost:3000/category",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${user.token}`,
+      },
+      data: {
+        name: parseCategory,
+        image: categoryimg,
+      },
+    });
+    console.log(response.data);
+    dispatch(addCategory(response.data));
+    setCategory("");
+    setCategoryimg("");
+    getCategories();
+  }
+
+  async function addCategoryButton(e) {
+    e.preventDefault();
+    handleSubmit();
+    handleClose();
+  }
 
   return (
     <section className="container w-100">
@@ -99,25 +114,38 @@ function Categories() {
           <Modal.Title>Add Category</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form method="POST" onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="categoryname">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="New Category" />
+              <Form.Control
+                type="text"
+                placeholder="New Category"
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="image">
               <Form.Label>Image</Form.Label>
-              <Form.Control type="text" placeholder="Image path" />
+              <Form.Control
+                type="file"
+                placeholder="Image path"
+                onChange={(event) => setCategoryimg(event.target.files[0])}
+              />
             </Form.Group>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button
+                variant="danger"
+                type="submit"
+                onClick={addCategoryButton}
+              >
+                Save Changes
+              </Button>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </section>
   );
