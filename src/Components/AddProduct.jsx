@@ -18,6 +18,7 @@ function AddProduct() {
       method: "POST",
       url: "http://localhost:3000/products",
       headers: {
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${user.token}`,
       },
       data: {
