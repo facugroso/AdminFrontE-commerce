@@ -74,7 +74,10 @@ function Products() {
                     <td>{item.price}</td>
                     <td>{item.stock}</td>
                     <td>
-                      <Link to="#" className="text-decoration-none">
+                      <Link
+                        to={`/products/${item.slug}`}
+                        className="text-decoration-none"
+                      >
                         Edit
                       </Link>
                     </td>
