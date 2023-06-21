@@ -1,13 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice";
 import "./SideBar.css";
 import Logo from "../assets/icons/logo.svg";
 
 function SideBar() {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const isActivePath = (path) => {
     return location.pathname === path ? "active" : "";
   };
+
+  function handleLogout() {
+    dispatch(logout());
+  }
 
   return (
     <aside
@@ -65,7 +72,11 @@ function SideBar() {
         </li>
       </ul>
       <hr className="px-2 py-3" />
-      <Link to="/login" className="nav-link text-white ps-3">
+      <Link
+        to="/login"
+        className="nav-link text-white ps-3"
+        onClick={handleLogout}
+      >
         <i
           className="bi bi-box-arrow-right me-2"
           style={{ color: "#ffffff", fontSize: "20px" }}
