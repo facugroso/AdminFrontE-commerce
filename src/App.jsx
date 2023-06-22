@@ -13,6 +13,7 @@ import AddProduct from "./Components/AddProduct";
 import Categories from "./Pages/Categories";
 import EditProduct from "./Components/EditProduct";
 import EditCategory from "./Components/EditCategory";
+import AddAdmin from "./Components/AddAdmin";
 
 import "./App.css";
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:slug" element={<EditCategory />} />
+            <Route path="/admin/add-admin" element={<AddAdmin />} />
           </Routes>
         </main>
       </div>
