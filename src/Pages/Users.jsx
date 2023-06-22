@@ -108,7 +108,10 @@ function Users() {
                     </td>
                     <td>{userInfo.email}</td>
                     <td>
-                      <Link to="#" className="text-decoration-none">
+                      <Link
+                        to={`/user/${userInfo.id}`}
+                        className="text-decoration-none"
+                      >
                         Edit
                       </Link>
                     </td>
@@ -125,7 +128,10 @@ function Users() {
                     </td>
                     <td>{admin.email}</td>
                     <td>
-                      <Link to="#" className="text-decoration-none">
+                      <Link
+                        to={`/admin/${admin.id}`}
+                        className="text-decoration-none"
+                      >
                         Edit
                       </Link>
                     </td>

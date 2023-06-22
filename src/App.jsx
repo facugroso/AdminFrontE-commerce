@@ -14,6 +14,8 @@ import Categories from "./Pages/Categories";
 import EditProduct from "./Components/EditProduct";
 import EditCategory from "./Components/EditCategory";
 import AddAdmin from "./Components/AddAdmin";
+import EditAdmin from "./Components/EditAdmin";
+import EditUser from "./Components/EditUser";
 
 import "./App.css";
 
@@ -39,6 +41,8 @@ function App() {
             <Route path="/categories" element={<Categories />} />
             <Route path="/categories/:slug" element={<EditCategory />} />
             <Route path="/admin/add-admin" element={<AddAdmin />} />
+            <Route path="/admin/:id" element={<EditAdmin />} />
+            <Route path="/user/:id" element={<EditUser />} />
           </Routes>
         </main>
       </div>
