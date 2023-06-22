@@ -1,8 +1,50 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import axios from "axios";
 
 import "./Home.css";
 
 function Home() {
+  const user = useSelector((state) => state.user);
+
+  const [orders, setOrders] = useState();
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    async function fetchData() {
+      const ordersResponse = await axios({
+        method: "get",
+        url: `http://localhost:3000/orders`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      const usersResponse = await axios({
+        method: "get",
+        url: `http://localhost:3000/users`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      const ordersPreview = [...ordersResponse.data];
+
+      setOrders(ordersPreview.slice(0, 4));
+      setUserData(usersResponse.data);
+    }
+    fetchData();
+  }, []);
+
+  const statusColors = {
+    Pending: "#737272",
+    Paid: "#0d6efd",
+    Sent: "#ecc94b",
+    Delivered: "#198754",
+  };
+
   return (
     <section className="container w-100">
       <div id="stats" className="row gx-5">
@@ -73,34 +115,49 @@ function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Mark Otto</td>
-              <td>$620</td>
-              <td style={{ color: "#737272" }}>
-                <i className="bi bi-clock"></i> Pending
-              </td>
-            </tr>
-            <tr>
-              <td>Jacob Thornton</td>
-              <td>$110</td>
-              <td style={{ color: "#0d6efd" }}>
-                <i className="bi bi-check"></i> Paid
-              </td>
-            </tr>
-            <tr>
-              <td>Larry the Bird</td>
-              <td>$1200</td>
-              <td style={{ color: "#198754" }}>
-                <i className="bi bi-check"></i> Delivered
-              </td>
-            </tr>
-            <tr>
-              <td>John Doe</td>
-              <td>$540</td>
-              <td style={{ color: "#ecc94b" }}>
-                <i className="bi bi-box-arrow-up"></i> Sent
-              </td>
-            </tr>
+            {orders &&
+              userData &&
+              orders.map((order) => (
+                <>
+                  <tr>
+                    <td>
+                      {userData.map((buyer) => {
+                        return (
+                          <>
+                            {buyer.id === order.userId && (
+                              <>
+                                {buyer.firstname} {buyer.lastname}
+                              </>
+                            )}
+                          </>
+                        );
+                      })}
+                    </td>
+                    <td>
+                      $
+                      {order.products.reduce(
+                        (total, product) =>
+                          total + product.price * product.quantity,
+                        0
+                      )}
+                    </td>
+                    <td style={{ color: statusColors[order.status] }}>
+                      {order.status === "Pending" ? (
+                        <i className="bi bi-clock"></i>
+                      ) : order.status === "Paid" ? (
+                        <i className="bi bi-check"></i>
+                      ) : order.status === "Sent" ? (
+                        <i className="bi bi-box-arrow-up"></i>
+                      ) : order.status === "Delivered" ? (
+                        <i className="bi bi-check"></i>
+                      ) : (
+                        " "
+                      )}{" "}
+                      {order.status}
+                    </td>
+                  </tr>
+                </>
+              ))}
           </tbody>
         </table>
       </div>
