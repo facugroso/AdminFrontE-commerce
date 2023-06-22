@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addCategory } from "../redux/categorySlice";
+import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -14,14 +13,14 @@ function Categories() {
   const [category, setCategory] = useState("");
   const [categoryimg, setCategoryimg] = useState("");
 
+  const [refresh, setRefresh] = useState(true);
+
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   async function getCategories() {
-    console.log("boop");
     const response = await axios({
       method: "get",
       url: `http://localhost:3000/categories`,
@@ -37,7 +36,7 @@ function Categories() {
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [refresh]);
 
   async function handleSubmit() {
     const parseCategory = category.toUpperCase();
@@ -55,10 +54,10 @@ function Categories() {
       },
     });
     console.log(response.data);
-    dispatch(addCategory(response.data));
     setCategory("");
     setCategoryimg("");
     getCategories();
+    setRefresh((prev) => !prev);
   }
 
   async function addCategoryButton(e) {
@@ -100,7 +99,10 @@ function Categories() {
                   </th>
                   <td className="text-center">{category.name}</td>
                   <td>
-                    <Link to="#" className="text-decoration-none">
+                    <Link
+                      to={`/categories/${category.slug}`}
+                      className="text-decoration-none"
+                    >
                       Edit
                     </Link>
                   </td>

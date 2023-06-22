@@ -82,9 +82,6 @@ function Users() {
               <Link to="/" className="btn btn-danger me-2" role="button">
                 Add Admin
               </Link>
-              <Link to="/" className="btn btn-danger" role="button">
-                Add User
-              </Link>
             </div>
           </div>
           <table className="table table-hover mt-3">
