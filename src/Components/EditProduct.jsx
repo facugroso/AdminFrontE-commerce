@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react";
-import { addProduct } from "../redux/productSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import "./AddProduct.css";
 import axios from "axios";
 
 function EditProduct() {
-  const dispatch = useDispatch();
   const params = useParams();
   const user = useSelector((state) => state.user);
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState(null);
   const [productName, setProductname] = useState("");
   const [descriptionTitle, setShortDescriptionTitle] = useState("");
   const [description, setDescription] = useState("");
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [gallery, setGallery] = useState("");
+  const [gallery, setGallery] = useState(null);
   const [categoryId, setCategoryId] = useState("");
   const [trending, setTrending] = useState("");
   const [features, setFeatures] = useState("");
@@ -32,6 +30,17 @@ function EditProduct() {
         url: `http://localhost:3000/products/${params.slug}`,
       });
       setProduct(response.data);
+      setProductname(response.data.name);
+      setShortDescriptionTitle(response.data.descriptionTitle);
+      setDescription(response.data.description);
+      setStock(response.data.stock);
+      setPrice(response.data.price);
+      setCategoryId(response.data.categoryId);
+      setTrending(response.data.trending);
+      setImage(response.data.image);
+      setGallery(response.data.gallery);
+      setFeatures(response.data.features);
+      //   console.log(response.data.gallery);
     }
     getProduct();
   }, []);
@@ -49,31 +58,18 @@ function EditProduct() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", productName);
-    formData.append("descriptionTitle", descriptionTitle);
-    formData.append("description", description);
-    formData.append("stock", stock);
-    formData.append("price", price);
-    formData.append("image", image);
-    formData.append("gallery", gallery);
+    const formData = new FormData(e.target);
     formData.append("categoryId", categoryId.toString());
     formData.append("trending", trending);
-    formData.append("features", features);
     const response = await axios({
       method: "PATCH",
-      url: `http://localhost:3000/products/${params.id}`,
+      url: `http://localhost:3000/products/${params.slug}`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${user.token}`,
       },
     });
-    dispatch(addProduct(response.data));
-    setProductname("");
-    setShortDescriptionTitle("");
-    setDescription("");
-    setStock("");
     navigate("/products");
   }
 
@@ -93,15 +89,16 @@ function EditProduct() {
 
             <form method="POST" onSubmit={handleSubmit} className="mt-4">
               <div className="form-group mb-3">
-                <label className="text-white" htmlFor="productName">
+                <label className="text-white" htmlFor="name">
                   Product Name
                 </label>
                 <input
+                  id="name"
                   type="text"
                   className="form-control form-control-sm bg-light mb-2"
-                  name="productName"
-                  value={product.name}
-                  onChange={(event) => setProductname(event.target.value)}
+                  name="name"
+                  value={productName} //product.name
+                  onChange={(event) => setProductname(event.target.value)} // setProduct((prevState) => {...prevState, name: event.target.value})
                 />
               </div>
 
@@ -110,10 +107,11 @@ function EditProduct() {
                   Description Title
                 </label>
                 <input
+                  id="descriptionTitle"
                   type="text"
                   className="form-control form-control-sm bg-light"
                   name="descriptionTitle"
-                  value={product.descriptionTitle}
+                  value={descriptionTitle}
                   onChange={(event) =>
                     setShortDescriptionTitle(event.target.value)
                   }
@@ -125,10 +123,11 @@ function EditProduct() {
                   Description
                 </label>
                 <textarea
+                  id="description"
                   type="text"
                   className="form-control form-control-sm bg-light"
                   name="description"
-                  value={product.description}
+                  value={description}
                   onChange={(event) => setDescription(event.target.value)}
                 />
               </div>
@@ -138,10 +137,11 @@ function EditProduct() {
                   Features
                 </label>
                 <input
+                  id="features"
                   type="text"
                   className="form-control form-control-sm bg-light"
                   name="features"
-                  value={product.features}
+                  value={features}
                   onChange={(event) => setFeatures(event.target.value)}
                 />
               </div>
@@ -151,10 +151,11 @@ function EditProduct() {
                   Stock
                 </label>
                 <input
+                  id="stock"
                   type="number"
                   className="form-control form-control-sm bg-light"
                   name="stock"
-                  value={product.stock}
+                  value={stock}
                   onChange={(event) => setStock(event.target.value)}
                 />
               </div>
@@ -164,10 +165,11 @@ function EditProduct() {
                   Unit Price
                 </label>
                 <input
+                  id="price"
                   type="number"
                   className="form-control form-control-sm bg-light"
                   name="price"
-                  value={product.price}
+                  value={price}
                   onChange={(event) => setPrice(event.target.value)}
                 />
               </div>
@@ -201,29 +203,63 @@ function EditProduct() {
                 </select>
               </div>
 
-              <div className="form-group mb-3">
+              <div className="form-group mb-3 d-flex flex-column">
                 <label htmlFor="image" className="form-label text-white">
                   Main image
                 </label>
+                <img
+                  className="mb-3"
+                  width={200}
+                  src={
+                    product.image.includes("https")
+                      ? product.image
+                      : `${import.meta.env.VITE_IMAGE_CLOUD_DIRECTION}/${
+                          product.image
+                        }`
+                  }
+                  alt="Product image"
+                />
                 <input
-                  className="form-control"
+                  className="form-control rounded-bottom"
                   type="file"
                   name="image"
                   id="image"
-                  onChange={(event) => setImage(event.target.files[0])}
+                  onChange={(event) => {
+                    setImage(event.target.files[0]);
+                  }}
                 />
               </div>
 
-              <div className="form-group mb-3">
+              <div className="form-group mb-3 d-flex flex-column">
                 <label htmlFor="gallery" className="form-label text-white">
                   Gallery
                 </label>
+                <div className="row">
+                  {product.gallery.map((galleryImg) => (
+                    <>
+                      <div className="col-4 mb-3">
+                        <img
+                          width={200}
+                          src={
+                            galleryImg.includes("https")
+                              ? galleryImg
+                              : `${
+                                  import.meta.env.VITE_IMAGE_CLOUD_DIRECTION
+                                }/${galleryImg}`
+                          }
+                          alt=""
+                        />
+                      </div>
+                    </>
+                  ))}
+                </div>
                 <input
                   className="form-control"
                   type="file"
                   name="gallery"
                   id="gallery"
-                  onChange={(event) => setGallery(event.target.files[0])}
+                  multiple
+                  onChange={(event) => setGallery(event.target.files)}
                 />
               </div>
 
