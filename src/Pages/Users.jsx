@@ -58,7 +58,10 @@ function Users() {
             <h2>
               {showUsers ? (
                 <>
-                  <span onClick={handleShowUsers}>Users</span> /{" "}
+                  <span onClick={handleShowUsers} style={{ cursor: "pointer" }}>
+                    Users
+                  </span>{" "}
+                  /{" "}
                   <span
                     className="border-bottom border-danger border-5"
                     onClick={handleShowAdmins}
@@ -74,7 +77,13 @@ function Users() {
                   >
                     Users
                   </span>{" "}
-                  / <span onClick={handleShowAdmins}>Admins</span>
+                  /{" "}
+                  <span
+                    onClick={handleShowAdmins}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Admins
+                  </span>
                 </>
               )}
             </h2>

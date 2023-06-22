@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import { addProduct } from "../redux/productSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./AddProduct.css";
 import axios from "axios";
 
 function AddProduct() {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [productName, setProductname] = useState("");
   const [descriptionTitle, setShortDescriptionTitle] = useState("");
@@ -14,7 +12,7 @@ function AddProduct() {
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [gallery, setGallery] = useState("");
+  const [gallery, setGallery] = useState(null);
   const [categoryId, setCategoryId] = useState("");
   const [trending, setTrending] = useState("");
   const [features, setFeatures] = useState("");
@@ -36,17 +34,9 @@ function AddProduct() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", productName);
-    formData.append("descriptionTitle", descriptionTitle);
-    formData.append("description", description);
-    formData.append("stock", stock);
-    formData.append("price", price);
-    formData.append("image", image);
-    formData.append("gallery", gallery);
+    const formData = new FormData(e.target);
     formData.append("categoryId", categoryId.toString());
     formData.append("trending", trending);
-    formData.append("features", features);
     const response = await axios({
       method: "POST",
       url: "http://localhost:3000/products",
@@ -56,11 +46,6 @@ function AddProduct() {
         Authorization: `Bearer ${user.token}`,
       },
     });
-    dispatch(addProduct(response.data));
-    setProductname("");
-    setShortDescriptionTitle("");
-    setDescription("");
-    setStock("");
     navigate("/products");
   }
 
@@ -74,13 +59,14 @@ function AddProduct() {
 
           <form method="POST" onSubmit={handleSubmit} className="mt-4">
             <div className="form-group mb-3">
-              <label className="text-white" htmlFor="productName">
+              <label className="text-white" htmlFor="name">
                 Product Name
               </label>
               <input
+                id="name"
                 type="text"
                 className="form-control form-control-sm bg-light mb-2"
-                name="productName"
+                name="name"
                 value={productName}
                 onChange={(event) => setProductname(event.target.value)}
               />
@@ -200,9 +186,10 @@ function AddProduct() {
               <input
                 className="form-control"
                 type="file"
+                multiple
                 name="gallery"
                 id="gallery"
-                onChange={(event) => setGallery(event.target.files[0])}
+                onChange={(event) => setGallery(event.target.files)}
               />
             </div>
 

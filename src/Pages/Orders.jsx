@@ -7,21 +7,40 @@ function Orders() {
   const user = useSelector((state) => state.user);
 
   const [orders, setOrders] = useState();
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
-    async function setOrders() {
-      const response = await axios({
+    async function fetchData() {
+      const ordersResponse = await axios({
         method: "get",
         url: `http://localhost:3000/orders`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
+      console.log("Orders Response:", ordersResponse.data);
 
-      setOrders(response.data);
+      const usersResponse = await axios({
+        method: "get",
+        url: `http://localhost:3000/users`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      console.log("Users Response:", usersResponse.data);
+      setOrders(ordersResponse.data);
+      setUserData(usersResponse.data);
     }
-    setOrders();
+    fetchData();
   }, []);
+
+  const statusColors = {
+    Pending: "#737272",
+    Paid: "#0d6efd",
+    Sent: "#ecc94b",
+    Delivered: "#198754",
+  };
+
   return (
     <section className="container w-100">
       <h2>Orders</h2>
@@ -29,42 +48,66 @@ function Orders() {
         <thead>
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">User</th>
+            <th scope="col" style={{ width: "45%" }}>
+              User
+            </th>
             <th scope="col">Total Price</th>
             <th scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>
-              <strong> Mark Otto</strong> {"("}markotto@email.com{")"}
-            </td>
-            <td>$620</td>
-            <td style={{ color: "#737272" }}>
-              <i className="bi bi-clock"></i> Pending
-            </td>{" "}
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>
-              <strong>Jacob Thornton</strong> {"("}jacobthornton@email.com{")"}
-            </td>
-            <td>$110</td>
-            <td style={{ color: "#0d6efd" }}>
-              <i className="bi bi-check"></i> Paid
-            </td>{" "}
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>
-              <strong>Larry the Bird</strong> {"("}larrythebird@email.com{")"}
-            </td>
-            <td>$1200</td>
-            <td style={{ color: "#198754" }}>
-              <i className="bi bi-check"></i> Delivered
-            </td>{" "}
-          </tr>
+          {orders &&
+            userData &&
+            orders.map((order) => (
+              <>
+                <tr>
+                  <th scope="row">{order.id}</th>
+                  <td>
+                    <>
+                      {userData.map((buyer) => {
+                        return (
+                          <>
+                            {buyer.id === order.userId && (
+                              <>
+                                <strong>
+                                  {" "}
+                                  {buyer.firstname} {buyer.lastname}
+                                </strong>
+                                {" ("}
+                                {buyer.email}
+                                {")"}
+                              </>
+                            )}
+                          </>
+                        );
+                      })}
+                    </>
+                  </td>
+                  <td>
+                    $
+                    {order.products.reduce(
+                      (total, product) =>
+                        total + product.price * product.quantity,
+                      0
+                    )}
+                  </td>
+                  <td style={{ color: statusColors[order.status] }}>
+                    {order.status === "Pending" ? (
+                      <i className="bi bi-clock"></i>
+                    ) : order.status === "Paid" ? (
+                      <i className="bi bi-check"></i>
+                    ) : order.status === "Sent" ? (
+                      <i className="bi bi-box-arrow-up"></i>
+                    ) : order.status === "Delivered" ? (
+                      <i className="bi bi-check"></i>
+                    ) : (
+                      " "
+                    )}{" "}
+                    {order.status}
+                  </td>
+                </tr>
+              </>
+            ))}
         </tbody>
       </table>
     </section>
