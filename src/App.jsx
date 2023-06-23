@@ -1,6 +1,7 @@
 import "./App.css";
 
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import NavBar from "./Components/NavBar";
 import SideBar from "./Components/SideBar";
@@ -19,10 +20,20 @@ import EditUser from "./Components/EditUser";
 
 import "./App.css";
 
+const ProtectedRoute = ({ user, children }) => {
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
 function App() {
   const location = useLocation();
   const hideComponents = ["/login"];
   const hideSidebarAndNavBar = !hideComponents.includes(location.pathname);
+
+  const user = useSelector((state) => state.user);
 
   return (
     <>
@@ -32,15 +43,88 @@ function App() {
           {hideSidebarAndNavBar && <NavBar />}
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/add" element={<AddProduct />} />
-            <Route path="/products/:slug" element={<EditProduct />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/categories/:slug" element={<EditCategory />} />
-            <Route path="/admin/add-admin" element={<AddAdmin />} />
+
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute user={user}>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/users"
+              element={
+                <ProtectedRoute user={user}>
+                  <Users />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute user={user}>
+                  <Users />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/products"
+              element={
+                <ProtectedRoute user={user}>
+                  <Products />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/products/add"
+              element={
+                <ProtectedRoute user={user}>
+                  <AddProduct />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/products/:slug"
+              element={
+                <ProtectedRoute user={user}>
+                  <EditProduct />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/orders"
+              element={
+                <ProtectedRoute user={user}>
+                  <Orders />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/categories"
+              element={
+                <ProtectedRoute user={user}>
+                  <Categories />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/categories/:slug"
+              element={
+                <ProtectedRoute user={user}>
+                  <EditCategory />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/add-admin"
+              element={
+                <ProtectedRoute user={user}>
+                  <AddAdmin />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/admin/:id" element={<EditAdmin />} />
             <Route path="/user/:id" element={<EditUser />} />
           </Routes>

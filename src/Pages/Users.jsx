@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
 function Users() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [userData, setUserData] = useState();
   const [admins, setAdmins] = useState();
@@ -42,12 +43,14 @@ function Users() {
     e.preventDefault();
     setShowUsers("");
     setShowAdmins("none");
+    navigate("/users");
   };
 
   const handleShowAdmins = (e) => {
     e.preventDefault();
     setShowUsers("none");
     setShowAdmins("");
+    navigate("/admin");
   };
 
   return (

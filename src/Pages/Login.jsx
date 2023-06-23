@@ -14,6 +14,12 @@ function Login() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
+
   async function handleLogin(event) {
     event.preventDefault();
 
