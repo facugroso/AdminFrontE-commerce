@@ -40,7 +40,6 @@ function EditProduct() {
       setImage(response.data.image);
       setGallery(response.data.gallery);
       setFeatures(response.data.features);
-      //   console.log(response.data.gallery);
     }
     getProduct();
   }, []);
@@ -55,6 +54,17 @@ function EditProduct() {
     }
     getCategories();
   }, []);
+
+  async function handleClick(e) {
+    const response = await axios({
+      method: "DELETE",
+      url: `http://localhost:3000/products/${params.slug}`,
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    navigate("/products");
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -83,7 +93,9 @@ function EditProduct() {
                 <h2 className="text-white">Edit Product</h2>
               </div>
               <div>
-                <button className="btn btn-danger">Delete Product</button>
+                <button onClick={handleClick} className="btn btn-danger">
+                  Delete Product
+                </button>
               </div>
             </div>
 
