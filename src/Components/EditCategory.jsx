@@ -67,11 +67,11 @@ function EditCategory() {
           <div className="p-3 shadow-lg rounded">
             <div className="d-flex justify-content-between align-items-center">
               <div>
-                <h2 className="text-white">Edit Product</h2>
+                <h2 className="text-white">Edit Category</h2>
               </div>
               <div>
                 <button className="btn btn-danger" onClick={handleDelete}>
-                  Delete Product
+                  Delete Category
                 </button>
               </div>
             </div>
