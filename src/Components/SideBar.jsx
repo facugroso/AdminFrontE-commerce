@@ -19,7 +19,7 @@ function SideBar() {
   return (
     <aside
       className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-      style={{ width: "280px", height: "100%" }}
+      style={{ width: "280px" }}
     >
       <div className="position-fixed sidebar-style">
         <Link

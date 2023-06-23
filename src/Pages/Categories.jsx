@@ -43,7 +43,7 @@ function Categories() {
 
     const response = await axios({
       method: "POST",
-      url: "http://localhost:3000/category",
+      url: "http://localhost:3000/categories",
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${user.token}`,
