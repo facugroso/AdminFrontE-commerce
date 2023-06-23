@@ -13,7 +13,7 @@ function Orders() {
     async function fetchData() {
       const ordersResponse = await axios({
         method: "get",
-        url: `http://localhost:3000/orders`,
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/orders`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -22,7 +22,7 @@ function Orders() {
 
       const usersResponse = await axios({
         method: "get",
-        url: `http://localhost:3000/users`,
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

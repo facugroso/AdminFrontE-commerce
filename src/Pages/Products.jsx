@@ -10,7 +10,7 @@ function Products() {
     async function getCategories() {
       const response = await axios({
         method: "get",
-        url: `http://localhost:3000/categories`,
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories`,
       });
       setCategories(response.data);
     }
@@ -21,7 +21,7 @@ function Products() {
     async function getProducts() {
       const response = await axios({
         method: "get",
-        url: `http://localhost:3000/products`,
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products`,
       });
       setProducts(response.data);
     }

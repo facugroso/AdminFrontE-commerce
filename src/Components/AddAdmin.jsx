@@ -15,7 +15,7 @@ function AddAdmin() {
     e.preventDefault();
     const response = await axios({
       method: "POST",
-      url: "http://localhost:3000/admin",
+      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin`,
       data: {
         firstname,
         lastname,

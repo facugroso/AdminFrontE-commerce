@@ -27,7 +27,9 @@ function EditProduct() {
     async function getProduct() {
       const response = await axios({
         method: "get",
-        url: `http://localhost:3000/products/${params.slug}`,
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products/${
+          params.slug
+        }`,
       });
       setProduct(response.data);
       setProductname(response.data.name);
@@ -48,7 +50,7 @@ function EditProduct() {
     async function getCategories() {
       const response = await axios({
         method: "get",
-        url: `http://localhost:3000/categories`,
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories`,
       });
       setCategories(response.data);
     }
@@ -58,7 +60,9 @@ function EditProduct() {
   async function handleClick(e) {
     const response = await axios({
       method: "DELETE",
-      url: `http://localhost:3000/products/${params.slug}`,
+      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products/${
+        params.slug
+      }`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -73,7 +77,9 @@ function EditProduct() {
     formData.append("trending", trending);
     const response = await axios({
       method: "PATCH",
-      url: `http://localhost:3000/products/${params.slug}`,
+      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products/${
+        params.slug
+      }`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",

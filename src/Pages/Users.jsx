@@ -15,7 +15,7 @@ function Users() {
     async function getUserData() {
       const response = await axios({
         method: "get",
-        url: `http://localhost:3000/users`,
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -29,7 +29,7 @@ function Users() {
     async function getAdmins() {
       const response = await axios({
         method: "get",
-        url: `http://localhost:3000/admin`,
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
