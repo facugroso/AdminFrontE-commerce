@@ -125,8 +125,22 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/admin/:id" element={<EditAdmin />} />
-            <Route path="/user/:id" element={<EditUser />} />
+            <Route
+              path="/admin/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <EditAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <EditUser />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
       </div>
