@@ -53,16 +53,36 @@ function EditAdmin() {
     setPassword("");
     navigate("/users");
   }
+  async function handleDelete(e) {
+    e.preventDefault();
+
+    const response = await axios({
+      method: "DELETE",
+      url: `http://localhost:3000/admin/${params.id}`,
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    navigate(-1);
+  }
 
   return (
     <>
       {admin && (
         <div id="form_box" className="bg-dark mb-5">
           <div className="p-3 shadow-lg rounded">
-            <div>
-              <h2 className="text-white">Edit Admin</h2>
+            {" "}
+            <div className="d-flex justify-content-between align-items-center">
+              <div>
+                <h2 className="text-white">Edit Admin</h2>
+              </div>
+              <div>
+                <button className="btn btn-danger" onClick={handleDelete}>
+                  Delete Admin
+                </button>
+              </div>
             </div>
-
             <form method="POST" onSubmit={handleSubmit} className="mt-4">
               <div className="form-group mb-3">
                 <label className="text-white" htmlFor="firstname">
