@@ -71,7 +71,7 @@ function ViewOrders() {
             </div>
             <div className="row py-2 border-bottom">
               <div className="col-4">
-                <strong>Address Name</strong>
+                <strong>Recipient's Name</strong>
               </div>
               <div className="col-6">
                 <span>
