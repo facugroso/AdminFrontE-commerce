@@ -8,17 +8,12 @@ function NavBar() {
 
   return (
     <nav className="navbar bg-white mb-5">
-      <div className="container-fluid d-flex justify-content-between">
-        <Link className="navbar-brand" to="#">
-          Admin Panel
-        </Link>
-        <div>
-          <span>Welcome, {user.firstname}</span>
-          <i
-            className="bi bi-person-circle"
-            style={{ fontSize: "30px", marginLeft: "0.5rem" }}
-          ></i>
-        </div>
+      <div className="container d-flex justify-content-end align-items-center">
+        <span>Welcome, {user.firstname}</span>
+        <i
+          className="bi bi-person-circle"
+          style={{ fontSize: "30px", marginLeft: "0.5rem" }}
+        ></i>
       </div>
     </nav>
   );
