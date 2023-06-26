@@ -69,61 +69,67 @@ function EditCategory() {
     <>
       {" "}
       {category && (
-        <div id="form_box" className="bg-dark mb-5">
-          <div className="p-3 shadow-lg rounded">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <h2 className="text-white">Edit Category</h2>
-              </div>
-              <div>
-                <button className="btn btn-danger" onClick={handleDelete}>
-                  Delete Category
-                </button>
-              </div>
+        <section className="container-fluid w-100 px-4">
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              <h2>Edit Category</h2>
             </div>
-
+            <div>
+              <button className="btn btn-danger" onClick={handleDelete}>
+                Delete Category
+              </button>
+            </div>
+          </div>
+          <div className="p-3 mt-3 bg-white border">
             <form method="POST" onSubmit={handleSubmit} className="mt-4">
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="categoryName">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="categoryName">
                   Category Name
                 </label>
-                <input
-                  type="text"
-                  className="form-control form-control-sm bg-light mb-2"
-                  name="categoryName"
-                  value={categoryName}
-                  onChange={(event) => setCategoryName(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    type="text"
+                    className="form-control form-control-sm mb-2"
+                    name="categoryName"
+                    value={categoryName}
+                    onChange={(event) => setCategoryName(event.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="form-group mb-3">
-                <label
-                  htmlFor="categoryimage"
-                  className="form-label text-white"
-                >
+              <div className="row form-group mb-3">
+                <label htmlFor="categoryimage" className="col-4 form-label">
                   Category Image
                 </label>
-                <input
-                  className="form-control"
-                  type="file"
-                  name="categoryimage"
-                  id="categoryimage"
-                  onChange={(event) => setCategoryimg(event.target.files[0])}
-                />
+                <div className="col-4">
+                  <input
+                    className="form-control"
+                    type="file"
+                    name="categoryimage"
+                    id="categoryimage"
+                    onChange={(event) => setCategoryimg(event.target.files[0])}
+                  />
+                </div>
               </div>
 
               <div className="mt-4 mb-3 text-center">
                 <button
-                  type="submit"
-                  className="btn btn-sm btn-light col"
-                  style={{ width: "40%" }}
+                  type="button"
+                  className="btn btn-sm btn-light col px-3 me-2"
+                  onClick={() => navigate(-1)}
                 >
-                  Edit
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-sm btn-danger col px-3"
+                >
+                  Update
                 </button>
               </div>
             </form>
           </div>
-        </div>
+        </section>
       )}
     </>
   );

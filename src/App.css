@@ -7,3 +7,12 @@ table a {
 table a:hover {
   color: #e01637;
 }
+.form-select option {
+  font-family: Figtree, sans-serif;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: #e01637;
+  border-width: 2px;
+  box-shadow: none;
+}

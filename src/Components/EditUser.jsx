@@ -74,85 +74,101 @@ function EditUser() {
   return (
     <>
       {admin && (
-        <div id="form_box" className="bg-dark mb-5">
-          <div className="p-3 shadow-lg rounded">
-            <div className="d-flex justify-content-between aling-item-center">
-              <div>
-                <h2 className="text-white">Edit User</h2>
-              </div>
-              <div>
-                <button className="btn btn-danger" onClick={handleDelete}>
-                  Delete User
-                </button>
-              </div>
+        <div className="container-fluid w-100 px-4">
+          <div className="d-flex justify-content-between aling-item-center">
+            <div>
+              <h2>Edit User</h2>
             </div>
+            <div>
+              <button className="btn btn-danger" onClick={handleDelete}>
+                Delete User
+              </button>
+            </div>
+          </div>
+          <div className="p-3 mt-3 bg-white border">
             <form method="POST" onSubmit={handleSubmit} className="mt-4">
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="firstname">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="firstname">
                   Firstname
                 </label>
-                <input
-                  type="text"
-                  className="form-control form-control-sm bg-light mb-2"
-                  name="firstname"
-                  value={firstname}
-                  onChange={(event) => setFirstname(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    type="text"
+                    className="form-control form-control-sm bg-light mb-2"
+                    name="firstname"
+                    value={firstname}
+                    onChange={(event) => setFirstname(event.target.value)}
+                  />
+                </div>
               </div>
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="lastname">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="lastname">
                   Lastname
                 </label>
-                <input
-                  type="text"
-                  className="form-control form-control-sm bg-light mb-2"
-                  name="lastname"
-                  value={lastname}
-                  onChange={(event) => setLastname(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    type="text"
+                    className="form-control form-control-sm bg-light mb-2"
+                    name="lastname"
+                    value={lastname}
+                    onChange={(event) => setLastname(event.target.value)}
+                  />
+                </div>
               </div>
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="email">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="email">
                   Email
                 </label>
-                <input
-                  type="email"
-                  className="form-control form-control-sm bg-light mb-2"
-                  name="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    type="email"
+                    className="form-control form-control-sm bg-light mb-2"
+                    name="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                </div>
               </div>
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="password">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="password">
                   Password
                 </label>
-                <input
-                  type="password"
-                  className="form-control form-control-sm bg-light mb-2"
-                  name="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    type="password"
+                    className="form-control form-control-sm bg-light mb-2"
+                    name="password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                  />
+                </div>
               </div>
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="phone">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="phone">
                   Phone
                 </label>
-                <input
-                  type="text"
-                  className="form-control form-control-sm bg-light mb-2"
-                  name="passphoneword"
-                  value={phone}
-                  onChange={(event) => setPhone(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    type="text"
+                    className="form-control form-control-sm bg-light mb-2"
+                    name="passphoneword"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                  />
+                </div>
               </div>
 
               <div className="mt-4 mb-3 text-center">
                 <button
+                  type="button"
+                  className="btn btn-sm btn-light col px-3 me-2"
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel
+                </button>
+                <button
                   type="submit"
-                  className="btn btn-sm btn-light col"
-                  style={{ width: "40%" }}
+                  className="btn btn-sm btn-danger col px-3"
                 >
                   Actualizar
                 </button>

@@ -8,10 +8,7 @@ function NavBar() {
 
   return (
     <nav className="navbar bg-white mb-5">
-      <div className="container-fluid d-flex justify-content-between">
-        <Link className="navbar-brand" to="#">
-          Admin Panel
-        </Link>
+      <div className="container-fluid d-flex justify-content-end px-4">
         <div>
           <span>Welcome, {user.firstname}</span>
           <i

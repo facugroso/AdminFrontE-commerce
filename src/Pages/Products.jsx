@@ -29,7 +29,7 @@ function Products() {
   }, []);
 
   return (
-    <section className="container w-100">
+    <section className="container-fluid w-100 px-4">
       <div className="d-flex justify-content-between">
         <h2>Products</h2>
 

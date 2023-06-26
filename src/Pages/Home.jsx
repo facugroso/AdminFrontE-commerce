@@ -46,7 +46,7 @@ function Home() {
   };
 
   return (
-    <section className="container w-100">
+    <section className="container-fluid w-100 px-4">
       <div id="stats" className="row gx-5">
         <div className="col-3">
           <div

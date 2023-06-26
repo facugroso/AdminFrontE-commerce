@@ -56,7 +56,7 @@ function Users() {
   return (
     <>
       {userData && admins && (
-        <section className="container w-100">
+        <section className="container-fluid w-100 px-4">
           <div className="d-flex justify-content-between">
             <h2>
               {showUsers ? (

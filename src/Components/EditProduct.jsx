@@ -92,141 +92,172 @@ function EditProduct() {
   return (
     <>
       {product && (
-        <div id="form_box" className="bg-dark mb-5">
-          <div className="p-3 shadow-lg rounded">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <h2 className="text-white">Edit Product</h2>
-              </div>
-              <div>
-                <button onClick={handleClick} className="btn btn-danger">
-                  Delete Product
-                </button>
-              </div>
+        <section className="container-fluid w-100 px-4">
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              <h2>Edit Product</h2>
             </div>
-
+            <div>
+              <button onClick={handleClick} className="btn btn-danger">
+                Delete Product
+              </button>
+            </div>
+          </div>
+          <div className="p-3 my-3 bg-white border">
             <form method="POST" onSubmit={handleSubmit} className="mt-4">
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="name">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="name">
                   Product Name
                 </label>
-                <input
-                  id="name"
-                  type="text"
-                  className="form-control form-control-sm bg-light mb-2"
-                  name="name"
-                  value={productName} //product.name
-                  onChange={(event) => setProductname(event.target.value)} // setProduct((prevState) => {...prevState, name: event.target.value})
-                />
+                <div className="col-4">
+                  <input
+                    id="name"
+                    type="text"
+                    className="form-control form-control-sm mb-2"
+                    name="name"
+                    value={productName}
+                    onChange={(event) => setProductname(event.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="descriptionTitle">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="descriptionTitle">
                   Description Title
                 </label>
-                <input
-                  id="descriptionTitle"
-                  type="text"
-                  className="form-control form-control-sm bg-light"
-                  name="descriptionTitle"
-                  value={descriptionTitle}
-                  onChange={(event) =>
-                    setShortDescriptionTitle(event.target.value)
-                  }
-                />
+                <div className="col-4">
+                  <input
+                    id="descriptionTitle"
+                    type="text"
+                    className="col-4 form-control form-control-sm"
+                    name="descriptionTitle"
+                    value={descriptionTitle}
+                    onChange={(event) =>
+                      setShortDescriptionTitle(event.target.value)
+                    }
+                  />
+                </div>
               </div>
 
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="description">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="description">
                   Description
                 </label>
-                <textarea
-                  id="description"
-                  type="text"
-                  className="form-control form-control-sm bg-light"
-                  name="description"
-                  value={description}
-                  onChange={(event) => setDescription(event.target.value)}
-                />
+                <div className="col-4">
+                  <textarea
+                    id="description"
+                    type="text"
+                    className="form-control form-control-sm "
+                    style={{ height: "150px" }}
+                    name="description"
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="features">
+              <div className=" row form-group mb-3">
+                <label className="col-4" htmlFor="features">
                   Features
                 </label>
-                <input
-                  id="features"
-                  type="text"
-                  className="form-control form-control-sm bg-light"
-                  name="features"
-                  value={features}
-                  onChange={(event) => setFeatures(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    id="features"
+                    type="text"
+                    className="form-control form-control-sm"
+                    name="features"
+                    value={features}
+                    onChange={(event) => setFeatures(event.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="stock">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="stock">
                   Stock
                 </label>
-                <input
-                  id="stock"
-                  type="number"
-                  className="form-control form-control-sm bg-light"
-                  name="stock"
-                  value={stock}
-                  onChange={(event) => setStock(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    id="stock"
+                    type="number"
+                    className="form-control form-control-sm"
+                    name="stock"
+                    value={stock}
+                    onChange={(event) => setStock(event.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="price">
+              <div className="row form-group mb-3">
+                <label className="col-4" htmlFor="price">
                   Unit Price
                 </label>
-                <input
-                  id="price"
-                  type="number"
-                  className="form-control form-control-sm bg-light"
-                  name="price"
-                  value={price}
-                  onChange={(event) => setPrice(event.target.value)}
-                />
+                <div className="col-4">
+                  <input
+                    id="price"
+                    type="number"
+                    className="form-control form-control-sm"
+                    name="price"
+                    value={price}
+                    onChange={(event) => setPrice(event.target.value)}
+                  />
+                </div>
               </div>
 
               <div className="input-group mb-3 d-flex flex-column">
-                <div>
-                  <label className="text-white" htmlFor="categoryId">
+                <div className="row">
+                  <label className="col-4" htmlFor="categoryId">
                     Category
                   </label>
-                </div>
-                <select
-                  className="form-select w-100 rounded"
-                  id="categoryId"
-                  aria-label="Example select with button addon"
-                  onChange={(event) => setCategoryId(event.target.value)}
-                >
-                  {categories && (
-                    <>
-                      {categories.map((category) => (
+
+                  <div className="col-4">
+                    <select
+                      className="form-select w-100 rounded"
+                      id="categoryId"
+                      aria-label="Example select with button addon"
+                      onChange={(event) => setCategoryId(event.target.value)}
+                    >
+                      {categories && (
                         <>
-                          {category.id === product.categoryId && (
-                            <option value={category.id} disabled selected>
-                              <>{category.name}</>
-                            </option>
-                          )}
-                          <option value={category.id}>{category.name}</option>
+                          {categories.map((category) => (
+                            <>
+                              {category.id === product.categoryId && (
+                                <option value={category.id} disabled selected>
+                                  <>{category.name}</>
+                                </option>
+                              )}
+                              <option value={category.id}>
+                                {category.name}
+                              </option>
+                            </>
+                          ))}
                         </>
-                      ))}
-                    </>
-                  )}
-                </select>
+                      )}
+                    </select>
+                  </div>
+                </div>
               </div>
 
-              <div className="form-group mb-3 d-flex flex-column">
-                <label htmlFor="image" className="form-label text-white">
-                  Main image
-                </label>
+              <div className="form-group mb-3">
+                <div className="row">
+                  <label htmlFor="image" className="col-4 form-label">
+                    Main image
+                  </label>
+                  <div className="col-4">
+                    <input
+                      className="form-control rounded-bottom"
+                      type="file"
+                      name="image"
+                      id="image"
+                      onChange={(event) => {
+                        setImage(event.target.files[0]);
+                      }}
+                    />
+                  </div>
+                </div>
                 <img
-                  className="mb-3"
+                  className="mb-3 d-block"
+                  style={{ margin: "1rem auto" }}
                   width={200}
                   src={
                     product.image.includes("https")
@@ -237,22 +268,25 @@ function EditProduct() {
                   }
                   alt="Product image"
                 />
-                <input
-                  className="form-control rounded-bottom"
-                  type="file"
-                  name="image"
-                  id="image"
-                  onChange={(event) => {
-                    setImage(event.target.files[0]);
-                  }}
-                />
               </div>
 
-              <div className="form-group mb-3 d-flex flex-column">
-                <label htmlFor="gallery" className="form-label text-white">
-                  Gallery
-                </label>
+              <div className="form-group mb-3">
                 <div className="row">
+                  <label htmlFor="gallery" className="col-4 form-label">
+                    Gallery
+                  </label>
+                  <div className="col-4">
+                    <input
+                      className="form-control"
+                      type="file"
+                      name="gallery"
+                      id="gallery"
+                      multiple
+                      onChange={(event) => setGallery(event.target.files)}
+                    />
+                  </div>
+                </div>
+                <div className="row" style={{ margin: "1rem auto" }}>
                   {product.gallery.map((galleryImg) => (
                     <>
                       <div className="col-4 mb-3">
@@ -271,58 +305,56 @@ function EditProduct() {
                     </>
                   ))}
                 </div>
-                <input
-                  className="form-control"
-                  type="file"
-                  name="gallery"
-                  id="gallery"
-                  multiple
-                  onChange={(event) => setGallery(event.target.files)}
-                />
               </div>
 
-              <div className="input-group mb-3 d-flex flex-column">
-                <div>
-                  <label className="text-white" htmlFor="trending">
-                    Trending
-                  </label>
+              <div className="row input-group mb-3">
+                <div className="col-4">
+                  <label htmlFor="trending">Trending</label>
                 </div>
-                <select
-                  className="form-select w-100 rounded"
-                  id="trending"
-                  aria-label="Example select with button addon"
-                  onChange={(event) => setTrending(event.target.value)}
-                >
-                  {product.trending === 0 ? (
-                    <>
-                      <option value={product.trending} disabled selected>
-                        No
-                      </option>
-                    </>
-                  ) : (
-                    <>
-                      <option value={product.trending} disabled selected>
-                        Yes
-                      </option>
-                    </>
-                  )}
-                  <option value="0">No</option>
-                  <option value="1">Yes</option>
-                </select>
+                <div className="col-4">
+                  <select
+                    className="form-select w-100 rounded"
+                    id="trending"
+                    aria-label="Example select with button addon"
+                    onChange={(event) => setTrending(event.target.value)}
+                  >
+                    {product.trending === 0 ? (
+                      <>
+                        <option value={product.trending} disabled selected>
+                          No
+                        </option>
+                      </>
+                    ) : (
+                      <>
+                        <option value={product.trending} disabled selected>
+                          Yes
+                        </option>
+                      </>
+                    )}
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                  </select>
+                </div>
               </div>
 
               <div className="mt-4 mb-3 text-center">
                 <button
-                  type="submit"
-                  className="btn btn-sm btn-light col"
-                  style={{ width: "40%" }}
+                  type="button"
+                  className="btn btn-sm btn-light col px-3 me-2"
+                  onClick={() => navigate(-1)}
                 >
-                  Edit
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-sm btn-danger col mx-3"
+                >
+                  Update
                 </button>
               </div>
             </form>
           </div>
-        </div>
+        </section>
       )}
     </>
   );
