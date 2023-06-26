@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditAdmin() {
   const user = useSelector((state) => state.user);
@@ -32,26 +34,50 @@ function EditAdmin() {
     getAdmin();
   }, []);
   async function handleSubmit(e) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const response = await axios({
-      method: "PATCH",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/${params.id}`,
-      data: {
-        firstname,
-        lastname,
-        email,
-        password,
-      },
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    setFirstname("");
-    setLastname("");
-    setEmail("");
-    setPassword("");
-    navigate("/users");
+      const response = await axios({
+        method: "PATCH",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin/${params.id}`,
+        data: {
+          firstname,
+          lastname,
+          email,
+          password,
+        },
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setFirstname("");
+      setLastname("");
+      setEmail("");
+      setPassword("");
+      toast.success("Admin edited successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate("/users");
+    } catch (error) {
+      toast.error("Failed to edit admin!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
   async function handleDelete(e) {
     e.preventDefault();

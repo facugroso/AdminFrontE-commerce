@@ -19,7 +19,6 @@ function Orders() {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      console.log("Orders Response:", ordersResponse.data);
 
       const usersResponse = await axios({
         method: "get",
@@ -28,7 +27,6 @@ function Orders() {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      console.log("Users Response:", usersResponse.data);
       setOrders(ordersResponse.data);
       setUserData(usersResponse.data);
     }
@@ -40,6 +38,27 @@ function Orders() {
     Paid: "#0d6efd",
     Sent: "#ecc94b",
     Delivered: "#198754",
+  };
+
+  const getOrderUserName = (order) => {
+    if (order.userId !== null) {
+      const user = userData.find((buyer) => buyer.id === order.userId);
+      if (user) {
+        return (
+          <>
+            <span className="fw-bold">
+              {user.firstname} {user.lastname}
+            </span>{" "}
+            ({user.email})
+          </>
+        );
+      }
+    }
+    return (
+      <span className="fw-bold">
+        {order.firstname} {order.lastname}
+      </span>
+    );
   };
 
   return (
@@ -61,30 +80,10 @@ function Orders() {
           {orders &&
             userData &&
             orders.map((order) => (
-              <>
-                <tr>
+              <tr key={order.id}>
+                <>
                   <th scope="row">{order.id}</th>
-                  <td>
-                    <>
-                      {userData.map((buyer) => {
-                        return (
-                          <>
-                            {buyer.id === order.userId && (
-                              <>
-                                <strong>
-                                  {" "}
-                                  {buyer.firstname} {buyer.lastname}
-                                </strong>
-                                {" ("}
-                                {buyer.email}
-                                {")"}
-                              </>
-                            )}
-                          </>
-                        );
-                      })}
-                    </>
-                  </td>
+                  <td>{getOrderUserName(order)}</td>
                   <td>
                     $
                     {order.products.reduce(

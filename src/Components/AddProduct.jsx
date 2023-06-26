@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./AddProduct.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddProduct() {
   const user = useSelector((state) => state.user);
@@ -33,20 +35,44 @@ function AddProduct() {
   }, []);
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    formData.append("categoryId", categoryId.toString());
-    formData.append("trending", trending);
-    const response = await axios({
-      method: "POST",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products`,
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    navigate("/products");
+    try {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      formData.append("categoryId", categoryId.toString());
+      formData.append("trending", trending);
+      const response = await axios({
+        method: "POST",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products`,
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      toast.success("Product created successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate(-1);
+    } catch (error) {
+      toast.error("Failed to create product!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
 
   return (

@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import "./AddProduct.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditProduct() {
   const params = useParams();
@@ -58,35 +60,83 @@ function EditProduct() {
   }, []);
 
   async function handleClick(e) {
-    const response = await axios({
-      method: "DELETE",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products/${
-        params.slug
-      }`,
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    navigate("/products");
+    try {
+      const response = await axios({
+        method: "DELETE",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products/${
+          params.slug
+        }`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      toast.success("Product deleted successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate(-1);
+    } catch (error) {
+      toast.error("Failed to delete product!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    formData.append("categoryId", categoryId.toString());
-    formData.append("trending", trending);
-    const response = await axios({
-      method: "PATCH",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products/${
-        params.slug
-      }`,
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    navigate("/products");
+    try {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      formData.append("categoryId", categoryId.toString());
+      formData.append("trending", trending);
+      const response = await axios({
+        method: "PATCH",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/products/${
+          params.slug
+        }`,
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      toast.success("Product edited successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate(-1);
+    } catch (error) {
+      toast.error("Failed to edit Product!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
 
   return (
