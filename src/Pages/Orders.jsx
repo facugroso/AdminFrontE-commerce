@@ -114,8 +114,8 @@ function Orders() {
                       View
                     </Link>
                   </td>
-                </tr>
-              </>
+                </>
+              </tr>
             ))}
         </tbody>
       </table>
