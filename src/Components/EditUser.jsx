@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditUser() {
   const user = useSelector((state) => state.user);
@@ -33,42 +35,92 @@ function EditUser() {
     }
     getUser();
   }, []);
+
   async function handleSubmit(e) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const response = await axios({
-      method: "PATCH",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users/${params.id}`,
-      data: {
-        firstname,
-        lastname,
-        email,
-        password,
-        phone,
-      },
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    setAdmin(response.data);
-    setFirstname(response.data.firstname);
-    setLastname(response.data.lastname);
-    setEmail(response.data.email);
-    setPassword(response.data.password);
-    setPhone(response.data.phone);
-    navigate("/users");
+      const response = await axios({
+        method: "PATCH",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users/${params.id}`,
+        data: {
+          firstname,
+          lastname,
+          email,
+          password,
+          phone,
+        },
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setAdmin(response.data);
+      setFirstname(response.data.firstname);
+      setLastname(response.data.lastname);
+      setEmail(response.data.email);
+      setPassword(response.data.password);
+      setPhone(response.data.phone);
+      toast.success("User edited successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate("/users");
+    } catch (error) {
+      toast.error("Failed to edit user!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
-  async function handleDelete(e) {
-    e.preventDefault();
 
-    const response = await axios({
-      method: "DELETE",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users/${params.id}`,
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    navigate(-1);
+  async function handleDelete(e) {
+    try {
+      e.preventDefault();
+
+      const response = await axios({
+        method: "DELETE",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users/${params.id}`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      toast.success("User deleted successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate(-1);
+    } catch (error) {
+      toast.error("Failed to delete user!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
 
   return (

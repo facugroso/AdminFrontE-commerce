@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function AddAdmin() {
   const admin = useSelector((state) => state.user);
   const [firstname, setFirstname] = useState("");
@@ -13,25 +16,50 @@ function AddAdmin() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await axios({
-      method: "POST",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin`,
-      data: {
-        firstname,
-        lastname,
-        email,
-        password,
-      },
-      headers: {
-        Authorization: `Bearer ${admin.token}`,
-      },
-    });
+    try {
+      const response = await axios({
+        method: "POST",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin`,
+        data: {
+          firstname,
+          lastname,
+          email,
+          password,
+        },
+        headers: {
+          Authorization: `Bearer ${admin.token}`,
+        },
+      });
 
-    setFirstname("");
-    setLastname("");
-    setEmail("");
-    setPassword("");
-    navigate("/users");
+      setFirstname("");
+      setLastname("");
+      setEmail("");
+      setPassword("");
+
+      toast.success("Admin created successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate("/users");
+    } catch (error) {
+      toast.error("Failed to create admin!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
 
   return (

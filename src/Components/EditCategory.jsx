@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditCategory() {
   const navigate = useNavigate();
@@ -28,41 +30,89 @@ function EditCategory() {
   }, []);
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const response = await axios({
-      method: "PATCH",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories/${
-        category.id
-      }`,
-      data: {
-        name: categoryName,
-        image: categoryimg,
-      },
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    setCategoryName("");
-    setCategoryimg("");
-    navigate(-1);
+      const response = await axios({
+        method: "PATCH",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories/${
+          category.id
+        }`,
+        data: {
+          name: categoryName,
+          image: categoryimg,
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setCategoryName("");
+      setCategoryimg("");
+      toast.success("Category edited successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate(-1);
+    } catch (error) {
+      toast.error("Failed to edit category!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
 
   async function handleDelete(e) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const response = await axios({
-      method: "DELETE",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories/${
-        category.id
-      }`,
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
+      const response = await axios({
+        method: "DELETE",
+        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories/${
+          category.id
+        }`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
 
-    navigate(-1);
+      toast.success("Category deteled successfully!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      navigate(-1);
+    } catch (error) {
+      toast.error("Failed to delete category!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   }
 
   return (
