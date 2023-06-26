@@ -92,7 +92,7 @@ function EditProduct() {
   return (
     <>
       {product && (
-        <section className="container-fluid w-100 px-4">
+        <section className="container-fluid w-50 px-4">
           <div className="d-flex justify-content-between align-items-center">
             <div>
               <h2>Edit Product</h2>
@@ -105,78 +105,59 @@ function EditProduct() {
           </div>
           <div className="p-3 my-3 bg-white border">
             <form method="POST" onSubmit={handleSubmit} className="mt-4">
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="name">
-                  Product Name
-                </label>
-                <div className="col-4">
-                  <input
-                    id="name"
-                    type="text"
-                    className="form-control form-control-sm mb-2"
-                    name="name"
-                    value={productName}
-                    onChange={(event) => setProductname(event.target.value)}
-                  />
-                </div>
+              <div className=" form-group mb-3">
+                <label htmlFor="name">Product Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  className="form-control form-control-sm mb-2"
+                  name="name"
+                  value={productName}
+                  onChange={(event) => setProductname(event.target.value)}
+                />
               </div>
 
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="descriptionTitle">
-                  Description Title
-                </label>
-                <div className="col-4">
-                  <input
-                    id="descriptionTitle"
-                    type="text"
-                    className="col-4 form-control form-control-sm"
-                    name="descriptionTitle"
-                    value={descriptionTitle}
-                    onChange={(event) =>
-                      setShortDescriptionTitle(event.target.value)
-                    }
-                  />
-                </div>
+              <div className=" form-group mb-3">
+                <label htmlFor="descriptionTitle">Description Title</label>
+                <input
+                  id="descriptionTitle"
+                  type="text"
+                  className="col-4 form-control form-control-sm"
+                  name="descriptionTitle"
+                  value={descriptionTitle}
+                  onChange={(event) =>
+                    setShortDescriptionTitle(event.target.value)
+                  }
+                />
               </div>
 
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="description">
-                  Description
-                </label>
-                <div className="col-4">
-                  <textarea
-                    id="description"
-                    type="text"
-                    className="form-control form-control-sm "
-                    style={{ height: "150px" }}
-                    name="description"
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}
-                  />
-                </div>
+              <div className=" form-group mb-3">
+                <label htmlFor="description">Description</label>
+                <textarea
+                  id="description"
+                  type="text"
+                  className="form-control form-control-sm "
+                  style={{ height: "150px" }}
+                  name="description"
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                />
               </div>
 
-              <div className=" row form-group mb-3">
-                <label className="col-4" htmlFor="features">
-                  Features
-                </label>
-                <div className="col-4">
-                  <input
-                    id="features"
-                    type="text"
-                    className="form-control form-control-sm"
-                    name="features"
-                    value={features}
-                    onChange={(event) => setFeatures(event.target.value)}
-                  />
-                </div>
+              <div className="  form-group mb-3">
+                <label htmlFor="features">Features</label>
+                <input
+                  id="features"
+                  type="text"
+                  className="form-control form-control-sm"
+                  name="features"
+                  value={features}
+                  onChange={(event) => setFeatures(event.target.value)}
+                />
               </div>
-
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="stock">
-                  Stock
-                </label>
-                <div className="col-4">
+              <div className="row">
+                <div className="col-6 form-group mb-3">
+                  <label htmlFor="stock">Stock</label>
                   <input
                     id="stock"
                     type="number"
@@ -186,13 +167,9 @@ function EditProduct() {
                     onChange={(event) => setStock(event.target.value)}
                   />
                 </div>
-              </div>
 
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="price">
-                  Unit Price
-                </label>
-                <div className="col-4">
+                <div className="col-6 form-group mb-3">
+                  <label htmlFor="price">Unit Price</label>
                   <input
                     id="price"
                     type="number"
@@ -203,14 +180,11 @@ function EditProduct() {
                   />
                 </div>
               </div>
-
               <div className="input-group mb-3 d-flex flex-column">
-                <div className="row">
-                  <label className="col-4" htmlFor="categoryId">
-                    Category
-                  </label>
+                <div>
+                  <label htmlFor="categoryId">Category</label>
 
-                  <div className="col-4">
+                  <div>
                     <select
                       className="form-select w-100 rounded"
                       id="categoryId"
@@ -239,11 +213,11 @@ function EditProduct() {
               </div>
 
               <div className="form-group mb-3">
-                <div className="row">
-                  <label htmlFor="image" className="col-4 form-label">
+                <div>
+                  <label htmlFor="image" className="form-label">
                     Main image
                   </label>
-                  <div className="col-4">
+                  <div>
                     <input
                       className="form-control rounded-bottom"
                       type="file"
@@ -271,11 +245,11 @@ function EditProduct() {
               </div>
 
               <div className="form-group mb-3">
-                <div className="row">
-                  <label htmlFor="gallery" className="col-4 form-label">
+                <div>
+                  <label htmlFor="gallery" className="form-label">
                     Gallery
                   </label>
-                  <div className="col-4">
+                  <div>
                     <input
                       className="form-control"
                       type="file"
@@ -291,7 +265,7 @@ function EditProduct() {
                     <>
                       <div className="col-4 mb-3">
                         <img
-                          width={200}
+                          style={{ width: "100%" }}
                           src={
                             galleryImg.includes("https")
                               ? galleryImg
@@ -307,40 +281,38 @@ function EditProduct() {
                 </div>
               </div>
 
-              <div className="row input-group mb-3">
-                <div className="col-4">
+              <div className=" input-group mb-3">
+                <div>
                   <label htmlFor="trending">Trending</label>
                 </div>
-                <div className="col-4">
-                  <select
-                    className="form-select w-100 rounded"
-                    id="trending"
-                    aria-label="Example select with button addon"
-                    onChange={(event) => setTrending(event.target.value)}
-                  >
-                    {product.trending === 0 ? (
-                      <>
-                        <option value={product.trending} disabled selected>
-                          No
-                        </option>
-                      </>
-                    ) : (
-                      <>
-                        <option value={product.trending} disabled selected>
-                          Yes
-                        </option>
-                      </>
-                    )}
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                  </select>
-                </div>
+                <select
+                  className="form-select w-100 rounded"
+                  id="trending"
+                  aria-label="Example select with button addon"
+                  onChange={(event) => setTrending(event.target.value)}
+                >
+                  {product.trending === 0 ? (
+                    <>
+                      <option value={product.trending} disabled selected>
+                        No
+                      </option>
+                    </>
+                  ) : (
+                    <>
+                      <option value={product.trending} disabled selected>
+                        Yes
+                      </option>
+                    </>
+                  )}
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select>
               </div>
 
               <div className="mt-4 mb-3 text-center">
                 <button
                   type="button"
-                  className="btn btn-sm btn-light col px-3 me-2"
+                  className="btn btn-sm btn-dark col px-3 me-2"
                   onClick={() => navigate(-1)}
                 >
                   Cancel

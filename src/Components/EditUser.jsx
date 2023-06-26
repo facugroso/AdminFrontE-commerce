@@ -74,7 +74,7 @@ function EditUser() {
   return (
     <>
       {admin && (
-        <div className="container-fluid w-100 px-4">
+        <section className="container-fluid w-50 px-4">
           <div className="d-flex justify-content-between aling-item-center">
             <div>
               <h2>Edit User</h2>
@@ -87,81 +87,61 @@ function EditUser() {
           </div>
           <div className="p-3 mt-3 bg-white border">
             <form method="POST" onSubmit={handleSubmit} className="mt-4">
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="firstname">
-                  Firstname
-                </label>
-                <div className="col-4">
-                  <input
-                    type="text"
-                    className="form-control form-control-sm bg-light mb-2"
-                    name="firstname"
-                    value={firstname}
-                    onChange={(event) => setFirstname(event.target.value)}
-                  />
-                </div>
+              <div className=" form-group mb-3">
+                <label htmlFor="firstname">Firstname</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm bg-light mb-2"
+                  name="firstname"
+                  value={firstname}
+                  onChange={(event) => setFirstname(event.target.value)}
+                />
               </div>
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="lastname">
-                  Lastname
-                </label>
-                <div className="col-4">
-                  <input
-                    type="text"
-                    className="form-control form-control-sm bg-light mb-2"
-                    name="lastname"
-                    value={lastname}
-                    onChange={(event) => setLastname(event.target.value)}
-                  />
-                </div>
+              <div className=" form-group mb-3">
+                <label htmlFor="lastname">Lastname</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm bg-light mb-2"
+                  name="lastname"
+                  value={lastname}
+                  onChange={(event) => setLastname(event.target.value)}
+                />
               </div>
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="email">
-                  Email
-                </label>
-                <div className="col-4">
-                  <input
-                    type="email"
-                    className="form-control form-control-sm bg-light mb-2"
-                    name="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </div>
+              <div className=" form-group mb-3">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  className="form-control form-control-sm bg-light mb-2"
+                  name="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
               </div>
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="password">
-                  Password
-                </label>
-                <div className="col-4">
-                  <input
-                    type="password"
-                    className="form-control form-control-sm bg-light mb-2"
-                    name="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                  />
-                </div>
+              <div className=" form-group mb-3">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  className="form-control form-control-sm bg-light mb-2"
+                  name="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
               </div>
-              <div className="row form-group mb-3">
-                <label className="col-4" htmlFor="phone">
-                  Phone
-                </label>
-                <div className="col-4">
-                  <input
-                    type="text"
-                    className="form-control form-control-sm bg-light mb-2"
-                    name="passphoneword"
-                    value={phone}
-                    onChange={(event) => setPhone(event.target.value)}
-                  />
-                </div>
+              <div className=" form-group mb-3">
+                <label htmlFor="phone">Phone</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm bg-light mb-2"
+                  name="passphoneword"
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                />
               </div>
 
               <div className="mt-4 mb-3 text-center">
                 <button
                   type="button"
-                  className="btn btn-sm btn-light col px-3 me-2"
+                  className="btn btn-sm btn-dark col px-3 me-2"
                   onClick={() => navigate(-1)}
                 >
                   Cancel
@@ -170,12 +150,12 @@ function EditUser() {
                   type="submit"
                   className="btn btn-sm btn-danger col px-3"
                 >
-                  Actualizar
+                  Update
                 </button>
               </div>
             </form>
           </div>
-        </div>
+        </section>
       )}
     </>
   );

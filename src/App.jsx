@@ -17,6 +17,7 @@ import EditCategory from "./Components/EditCategory";
 import AddAdmin from "./Components/AddAdmin";
 import EditAdmin from "./Components/EditAdmin";
 import EditUser from "./Components/EditUser";
+import ViewOrders from "./Components/ViewOrders";
 
 import "./App.css";
 
@@ -138,6 +139,14 @@ function App() {
               element={
                 <ProtectedRoute user={user}>
                   <EditUser />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/orders/:id"
+              element={
+                <ProtectedRoute user={user}>
+                  <ViewOrders />
                 </ProtectedRoute>
               }
             />

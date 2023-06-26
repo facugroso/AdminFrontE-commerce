@@ -51,21 +51,26 @@ function AddProduct() {
 
   return (
     <>
-      <div id="form_box" className="bg-dark mb-5">
-        <div className="p-3 shadow-lg rounded">
+      <section className="container-fluid w-50 px-4 mb-3">
+        <div className="d-flex justify-content-between aling-item-center">
           <div>
-            <h2 className="text-white">New Product</h2>
+            <h2>New Product</h2>
           </div>
+          <div>
+            <button className="btn btn-dark" onClick={() => navigate(-1)}>
+              Back
+            </button>
+          </div>
+        </div>
 
+        <div className="p-3 mt-3 bg-white border">
           <form method="POST" onSubmit={handleSubmit} className="mt-4">
             <div className="form-group mb-3">
-              <label className="text-white" htmlFor="name">
-                Product Name
-              </label>
+              <label htmlFor="name">Product Name</label>
               <input
                 id="name"
                 type="text"
-                className="form-control form-control-sm bg-light mb-2"
+                className="form-control form-control-sm  mb-2"
                 name="name"
                 value={productName}
                 onChange={(event) => setProductname(event.target.value)}
@@ -73,12 +78,10 @@ function AddProduct() {
             </div>
 
             <div className="form-group mb-3">
-              <label className="text-white" htmlFor="descriptionTitle">
-                Description Title
-              </label>
+              <label htmlFor="descriptionTitle">Description Title</label>
               <input
                 type="text"
-                className="form-control form-control-sm bg-light"
+                className="form-control form-control-sm "
                 name="descriptionTitle"
                 value={descriptionTitle}
                 onChange={(event) =>
@@ -88,12 +91,10 @@ function AddProduct() {
             </div>
 
             <div className="form-group mb-3">
-              <label className="text-white" htmlFor="description">
-                Description
-              </label>
+              <label htmlFor="description">Description</label>
               <textarea
                 type="text"
-                className="form-control form-control-sm bg-light"
+                className="form-control form-control-sm "
                 name="description"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
@@ -101,49 +102,41 @@ function AddProduct() {
             </div>
 
             <div className="form-group mb-3">
-              <label className="text-white" htmlFor="features">
-                Features
-              </label>
+              <label htmlFor="features">Features</label>
               <input
                 type="text"
-                className="form-control form-control-sm bg-light"
+                className="form-control form-control-sm "
                 name="features"
                 value={features}
                 onChange={(event) => setFeatures(event.target.value)}
               />
             </div>
+            <div className="row">
+              <div className="col-6 form-group mb-3">
+                <label htmlFor="stock">Stock</label>
+                <input
+                  type="number"
+                  className="form-control form-control-sm "
+                  name="stock"
+                  value={stock}
+                  onChange={(event) => setStock(event.target.value)}
+                />
+              </div>
 
-            <div className="form-group mb-3">
-              <label className="text-white" htmlFor="stock">
-                Stock
-              </label>
-              <input
-                type="number"
-                className="form-control form-control-sm bg-light"
-                name="stock"
-                value={stock}
-                onChange={(event) => setStock(event.target.value)}
-              />
+              <div className="col-6 form-group mb-3">
+                <label htmlFor="price">Unit Price</label>
+                <input
+                  type="number"
+                  className="form-control form-control-sm "
+                  name="price"
+                  value={price}
+                  onChange={(event) => setPrice(event.target.value)}
+                />
+              </div>
             </div>
-
-            <div className="form-group mb-3">
-              <label className="text-white" htmlFor="price">
-                Unit Price
-              </label>
-              <input
-                type="number"
-                className="form-control form-control-sm bg-light"
-                name="price"
-                value={price}
-                onChange={(event) => setPrice(event.target.value)}
-              />
-            </div>
-
             <div className="input-group mb-3 d-flex flex-column">
               <div>
-                <label className="text-white" htmlFor="categoryId">
-                  Category
-                </label>
+                <label htmlFor="categoryId">Category</label>
               </div>
               <select
                 className="form-select w-100 rounded"
@@ -195,9 +188,7 @@ function AddProduct() {
 
             <div className="input-group mb-3 d-flex flex-column">
               <div>
-                <label className="text-white" htmlFor="trending">
-                  Trending
-                </label>
+                <label htmlFor="trending">Trending</label>
               </div>
               <select
                 className="form-select w-100 rounded"
@@ -215,16 +206,19 @@ function AddProduct() {
 
             <div className="mt-4 mb-3 text-center">
               <button
-                type="submit"
-                className="btn btn-sm btn-light col"
-                style={{ width: "40%" }}
+                type="button"
+                className="btn btn-sm btn-dark col px-3 me-2"
+                onClick={() => navigate(-1)}
               >
+                Cancel
+              </button>
+              <button type="submit" className="btn btn-sm btn-danger col px-3">
                 Create
               </button>
             </div>
           </form>
         </div>
-      </div>
+      </section>
     </>
   );
 }

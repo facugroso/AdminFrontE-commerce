@@ -70,24 +70,23 @@ function EditAdmin() {
   return (
     <>
       {admin && (
-        <div id="form_box" className="bg-dark mb-5">
-          <div className="p-3 shadow-lg rounded">
-            {" "}
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <h2 className="text-white">Edit Admin</h2>
-              </div>
-              <div>
-                <button className="btn btn-danger" onClick={handleDelete}>
-                  Delete Admin
-                </button>
-              </div>
+        <section className="container-fluid w-50 px-4">
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              <h2>Edit Admin</h2>
             </div>
+            <div>
+              <button className="btn btn-danger" onClick={handleDelete}>
+                Delete Admin
+              </button>
+            </div>
+          </div>
+          <div className="p-3 mt-3 bg-white border">
+            {" "}
             <form method="POST" onSubmit={handleSubmit} className="mt-4">
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="firstname">
-                  Firstname
-                </label>
+              <div className=" form-group mb-3">
+                <label htmlFor="firstname">Firstname</label>
+
                 <input
                   type="text"
                   className="form-control form-control-sm bg-light mb-2"
@@ -96,10 +95,8 @@ function EditAdmin() {
                   onChange={(event) => setFirstname(event.target.value)}
                 />
               </div>
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="lastname">
-                  Lastname
-                </label>
+              <div className=" form-group mb-3">
+                <label htmlFor="lastname">Lastname</label>
                 <input
                   type="text"
                   className="form-control form-control-sm bg-light mb-2"
@@ -109,9 +106,7 @@ function EditAdmin() {
                 />
               </div>
               <div className="form-group mb-3">
-                <label className="text-white" htmlFor="email">
-                  Email
-                </label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   className="form-control form-control-sm bg-light mb-2"
@@ -120,10 +115,8 @@ function EditAdmin() {
                   onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
-              <div className="form-group mb-3">
-                <label className="text-white" htmlFor="password">
-                  Password
-                </label>
+              <div className=" form-group mb-3">
+                <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   className="form-control form-control-sm bg-light mb-2"
@@ -135,16 +128,22 @@ function EditAdmin() {
 
               <div className="mt-4 mb-3 text-center">
                 <button
-                  type="submit"
-                  className="btn btn-sm btn-light col"
-                  style={{ width: "40%" }}
+                  type="button"
+                  className="btn btn-sm btn-dark col px-3 me-2"
+                  onClick={() => navigate(-1)}
                 >
-                  Actualizar
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-sm btn-danger col px-3"
+                >
+                  Update
                 </button>
               </div>
             </form>
           </div>
-        </div>
+        </section>
       )}
     </>
   );

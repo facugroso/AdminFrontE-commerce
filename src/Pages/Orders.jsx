@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -53,6 +54,7 @@ function Orders() {
             </th>
             <th scope="col">Total Price</th>
             <th scope="col">Status</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -104,6 +106,14 @@ function Orders() {
                       " "
                     )}{" "}
                     {order.status}
+                  </td>
+                  <td>
+                    <Link
+                      to={`/orders/${order.id}`}
+                      className="text-decoration-none"
+                    >
+                      View
+                    </Link>
                   </td>
                 </tr>
               </>
