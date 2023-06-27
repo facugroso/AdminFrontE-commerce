@@ -15,3 +15,9 @@ aside a:hover i {
 .sidebar-style {
   width: 15rem;
 }
+
+@media screen and (min-width: 640px) {
+  #sidebar {
+    position: fixed;
+  }
+}

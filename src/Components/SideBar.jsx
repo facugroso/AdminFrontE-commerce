@@ -21,7 +21,7 @@ function SideBar() {
       className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
       style={{ width: "280px" }}
     >
-      <div className="position-fixed sidebar-style">
+      <div id="sidebar" className="sidebar-style">
         <Link
           id="sidebar_header"
           to="/"
