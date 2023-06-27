@@ -135,6 +135,7 @@ function EditCategory() {
               <div className="form-group mb-3">
                 <label htmlFor="categoryName">Category Name</label>
                 <input
+                  required
                   type="text"
                   className="form-control form-control-sm mb-2"
                   name="categoryName"

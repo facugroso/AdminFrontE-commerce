@@ -114,6 +114,7 @@ function EditAdmin() {
                 <label htmlFor="firstname">Firstname</label>
 
                 <input
+                  required
                   type="text"
                   className="form-control form-control-sm bg-light mb-2"
                   name="firstname"
@@ -124,6 +125,7 @@ function EditAdmin() {
               <div className=" form-group mb-3">
                 <label htmlFor="lastname">Lastname</label>
                 <input
+                  required
                   type="text"
                   className="form-control form-control-sm bg-light mb-2"
                   name="lastname"
@@ -134,6 +136,7 @@ function EditAdmin() {
               <div className="form-group mb-3">
                 <label htmlFor="email">Email</label>
                 <input
+                  required
                   type="email"
                   className="form-control form-control-sm bg-light mb-2"
                   name="email"
@@ -144,6 +147,7 @@ function EditAdmin() {
               <div className=" form-group mb-3">
                 <label htmlFor="password">Password</label>
                 <input
+                  required
                   type="password"
                   className="form-control form-control-sm bg-light mb-2"
                   name="password"

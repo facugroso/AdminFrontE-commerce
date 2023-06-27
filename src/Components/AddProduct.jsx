@@ -94,6 +94,7 @@ function AddProduct() {
             <div className="form-group mb-3">
               <label htmlFor="name">Product Name</label>
               <input
+                required
                 id="name"
                 type="text"
                 className="form-control form-control-sm  mb-2"
@@ -106,6 +107,7 @@ function AddProduct() {
             <div className="form-group mb-3">
               <label htmlFor="descriptionTitle">Description Title</label>
               <input
+                required
                 type="text"
                 className="form-control form-control-sm "
                 name="descriptionTitle"
@@ -119,6 +121,7 @@ function AddProduct() {
             <div className="form-group mb-3">
               <label htmlFor="description">Description</label>
               <textarea
+                required
                 type="text"
                 className="form-control form-control-sm "
                 name="description"
@@ -130,6 +133,7 @@ function AddProduct() {
             <div className="form-group mb-3">
               <label htmlFor="features">Features</label>
               <input
+                required
                 type="text"
                 className="form-control form-control-sm "
                 name="features"
@@ -141,6 +145,7 @@ function AddProduct() {
               <div className="col-6 form-group mb-3">
                 <label htmlFor="stock">Stock</label>
                 <input
+                  required
                   type="number"
                   className="form-control form-control-sm "
                   name="stock"
@@ -152,6 +157,7 @@ function AddProduct() {
               <div className="col-6 form-group mb-3">
                 <label htmlFor="price">Unit Price</label>
                 <input
+                  required
                   type="number"
                   className="form-control form-control-sm "
                   name="price"
@@ -165,6 +171,7 @@ function AddProduct() {
                 <label htmlFor="categoryId">Category</label>
               </div>
               <select
+                required
                 className="form-select w-100 rounded"
                 id="categoryId"
                 aria-label="Example select with button addon"
@@ -190,6 +197,7 @@ function AddProduct() {
                 Main image
               </label>
               <input
+                required
                 className="form-control"
                 type="file"
                 name="image"
@@ -203,6 +211,7 @@ function AddProduct() {
                 Gallery
               </label>
               <input
+                required
                 className="form-control"
                 type="file"
                 multiple
@@ -217,6 +226,7 @@ function AddProduct() {
                 <label htmlFor="trending">Trending</label>
               </div>
               <select
+                required
                 className="form-select w-100 rounded"
                 id="trending"
                 aria-label="Example select with button addon"
@@ -232,6 +242,7 @@ function AddProduct() {
 
             <div className="mt-4 mb-3 text-center">
               <button
+                required
                 type="button"
                 className="btn btn-sm btn-dark col px-3 me-2"
                 onClick={() => navigate(-1)}
