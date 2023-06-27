@@ -55,7 +55,6 @@ function Categories() {
         image: categoryimg,
       },
     });
-    console.log(response.data);
     setCategory("");
     setCategoryimg("");
     getCategories();
@@ -74,6 +73,23 @@ function Categories() {
 
   async function addCategoryButton(e) {
     e.preventDefault();
+
+    if (!category || !categoryimg) {
+      return toast.error(
+        "Failed to create category, please complete all fields.",
+        {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
+    }
+
     handleSubmit();
     handleClose();
   }
@@ -140,24 +156,29 @@ function Categories() {
           <Modal.Title>Add Category</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form method="POST" onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="categoryname">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
+          <form method="POST" onSubmit={handleSubmit}>
+            <div className="form-group mb-3">
+              <label>Name</label>
+              <input
+                className="form-control"
                 type="text"
                 placeholder="New Category"
                 value={category}
+                required
                 onChange={(event) => setCategory(event.target.value)}
               />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="image">
-              <Form.Label>Image</Form.Label>
-              <Form.Control
+            </div>
+            <div className="form-group mb-3">
+              <label>Image</label>
+              <input
+                className="form-control-file"
                 type="file"
                 placeholder="Image path"
+                style={{ width: "100%" }}
+                required
                 onChange={(event) => setCategoryimg(event.target.files[0])}
               />
-            </Form.Group>
+            </div>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close
@@ -170,7 +191,7 @@ function Categories() {
                 Save Changes
               </Button>
             </Modal.Footer>
-          </Form>
+          </form>
         </Modal.Body>
       </Modal>
     </section>
