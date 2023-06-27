@@ -158,6 +158,7 @@ function EditProduct() {
               <div className=" form-group mb-3">
                 <label htmlFor="name">Product Name</label>
                 <input
+                  required
                   id="name"
                   type="text"
                   className="form-control form-control-sm mb-2"
@@ -170,6 +171,7 @@ function EditProduct() {
               <div className=" form-group mb-3">
                 <label htmlFor="descriptionTitle">Description Title</label>
                 <input
+                  required
                   id="descriptionTitle"
                   type="text"
                   className="col-4 form-control form-control-sm"
@@ -184,6 +186,7 @@ function EditProduct() {
               <div className=" form-group mb-3">
                 <label htmlFor="description">Description</label>
                 <textarea
+                  required
                   id="description"
                   type="text"
                   className="form-control form-control-sm "
@@ -197,6 +200,7 @@ function EditProduct() {
               <div className="  form-group mb-3">
                 <label htmlFor="features">Features</label>
                 <input
+                  required
                   id="features"
                   type="text"
                   className="form-control form-control-sm"
@@ -209,6 +213,7 @@ function EditProduct() {
                 <div className="col-6 form-group mb-3">
                   <label htmlFor="stock">Stock</label>
                   <input
+                    required
                     id="stock"
                     type="number"
                     className="form-control form-control-sm"
@@ -221,6 +226,7 @@ function EditProduct() {
                 <div className="col-6 form-group mb-3">
                   <label htmlFor="price">Unit Price</label>
                   <input
+                    required
                     id="price"
                     type="number"
                     className="form-control form-control-sm"
@@ -236,6 +242,7 @@ function EditProduct() {
 
                   <div>
                     <select
+                      required
                       className="form-select w-100 rounded"
                       id="categoryId"
                       aria-label="Example select with button addon"
@@ -336,6 +343,7 @@ function EditProduct() {
                   <label htmlFor="trending">Trending</label>
                 </div>
                 <select
+                  required
                   className="form-select w-100 rounded"
                   id="trending"
                   aria-label="Example select with button addon"

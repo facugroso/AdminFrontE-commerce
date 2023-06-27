@@ -81,6 +81,7 @@ function AddAdmin() {
             <div className="form-group mb-3">
               <label htmlFor="firstname">Firstname</label>
               <input
+                required
                 type="text"
                 className="form-control form-control-sm mb-2"
                 name="firstname"
@@ -91,6 +92,7 @@ function AddAdmin() {
             <div className="form-group mb-3">
               <label htmlFor="lastname">Lastname</label>
               <input
+                required
                 type="text"
                 className="form-control form-control-sm mb-2"
                 name="lastname"
@@ -101,6 +103,7 @@ function AddAdmin() {
             <div className="form-group mb-3">
               <label htmlFor="email">Email</label>
               <input
+                required
                 type="email"
                 className="form-control form-control-sm mb-2"
                 name="email"
@@ -111,6 +114,7 @@ function AddAdmin() {
             <div className="form-group mb-3">
               <label htmlFor="password">Password</label>
               <input
+                required
                 type="password"
                 className="form-control form-control-sm mb-2"
                 name="password"
