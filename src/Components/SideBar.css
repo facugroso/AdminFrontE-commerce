@@ -6,7 +6,12 @@ aside a:hover i {
 .active a i {
   color: #e01637 !important;
 }
-
+#sidebar_header p {
+  font-size: 0.8rem;
+}
+#sidebar_header:hover p {
+  color: #ffffff;
+}
 .sidebar-style {
   width: 15rem;
 }

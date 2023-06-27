@@ -86,11 +86,16 @@ function Orders() {
                   <td>{getOrderUserName(order)}</td>
                   <td>
                     $
-                    {order.products.reduce(
-                      (total, product) =>
-                        total + product.price * product.quantity,
-                      0
-                    )}
+                    {order.products
+                      .reduce(
+                        (total, product) =>
+                          total +
+                          parseFloat(
+                            (product.price * product.quantity).toFixed(2)
+                          ),
+                        0
+                      )
+                      .toFixed(2)}
                   </td>
                   <td style={{ color: statusColors[order.status] }}>
                     {order.status === "Pending" ? (

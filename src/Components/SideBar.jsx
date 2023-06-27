@@ -23,6 +23,7 @@ function SideBar() {
     >
       <div className="position-fixed sidebar-style">
         <Link
+          id="sidebar_header"
           to="/"
           className="d-flex align-items-center mb-3 mb-md-0 justify-content-center text-white text-decoration-none"
         >
@@ -32,6 +33,7 @@ function SideBar() {
             style={{ width: "100px" }}
             className="d-inline-block"
           />
+          <p className="d-block text-center">Admin Panel</p>
         </Link>
         <hr />
         <ul className="nav nav-pills flex-column">
