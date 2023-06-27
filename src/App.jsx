@@ -18,6 +18,7 @@ import AddAdmin from "./Components/AddAdmin";
 import EditAdmin from "./Components/EditAdmin";
 import EditUser from "./Components/EditUser";
 import ViewOrders from "./Components/ViewOrders";
+import Err404 from "./Pages/error404";
 
 import "./App.css";
 
@@ -44,6 +45,7 @@ function App() {
           {hideSidebarAndNavBar && <NavBar />}
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="*" element={<Err404 />} />
 
             <Route
               path="/"
