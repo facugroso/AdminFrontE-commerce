@@ -59,7 +59,7 @@ function EditProduct() {
     getCategories();
   }, []);
 
-  async function handleClick(e) {
+  async function handleClick() {
     try {
       const response = await axios({
         method: "DELETE",

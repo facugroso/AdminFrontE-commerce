@@ -9,3 +9,8 @@
 #login_box h2 {
   font-size: 26px;
 }
+#credentials {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
