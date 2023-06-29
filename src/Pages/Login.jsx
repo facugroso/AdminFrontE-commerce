@@ -129,7 +129,7 @@ function Login() {
       >
         <h5>Credentials</h5>
         <span className="d-block">Email: admin@admin </span>
-        <span className="d-block">Password: carlos</span>
+        <span className="d-block">Password: 1234</span>
       </div>
     </>
   );
