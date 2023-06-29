@@ -20,7 +20,7 @@ function EditAdmin() {
     async function getAdmin() {
       const response = await axios({
         method: "get",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin/${params.id}`,
+        url: `${import.meta.env.VITE_API_URL}/admin/${params.id}`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -39,7 +39,7 @@ function EditAdmin() {
 
       const response = await axios({
         method: "PATCH",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin/${params.id}`,
+        url: `${import.meta.env.VITE_API_URL}/admin/${params.id}`,
         data: {
           firstname,
           lastname,
@@ -84,7 +84,7 @@ function EditAdmin() {
 
     const response = await axios({
       method: "DELETE",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin/${params.id}`,
+      url: `${import.meta.env.VITE_API_URL}/admin/${params.id}`,
       headers: {
         Authorization: `Bearer ${user.token}`,
       },

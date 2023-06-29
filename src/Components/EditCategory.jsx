@@ -19,9 +19,7 @@ function EditCategory() {
     async function getCategory() {
       const response = await axios({
         method: "get",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories/${
-          params.slug
-        }`,
+        url: `${import.meta.env.VITE_API_URL}/categories/${params.slug}`,
       });
       setCategory(response.data);
       setCategoryName(response.data.name);
@@ -35,9 +33,7 @@ function EditCategory() {
 
       const response = await axios({
         method: "PATCH",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories/${
-          category.id
-        }`,
+        url: `${import.meta.env.VITE_API_URL}/categories/${category.id}`,
         data: {
           name: categoryName,
           image: categoryimg,
@@ -81,9 +77,7 @@ function EditCategory() {
 
       const response = await axios({
         method: "DELETE",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories/${
-          category.id
-        }`,
+        url: `${import.meta.env.VITE_API_URL}/categories/${category.id}`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

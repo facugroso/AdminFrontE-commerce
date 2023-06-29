@@ -23,9 +23,7 @@ function ViewOrders() {
     async function fetchData() {
       const orderResponse = await axios({
         method: "get",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/orders/${
-          params.id
-        }`,
+        url: `${import.meta.env.VITE_API_URL}/orders/${params.id}`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

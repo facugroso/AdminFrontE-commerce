@@ -25,7 +25,7 @@ function Categories() {
   async function getCategories() {
     const response = await axios({
       method: "get",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories`,
+      url: `${import.meta.env.VITE_API_URL}/categories`,
     });
 
     const categoriesData = response.data.map((category) => ({
@@ -45,7 +45,7 @@ function Categories() {
 
     const response = await axios({
       method: "POST",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/categories`,
+      url: `${import.meta.env.VITE_API_URL}/categories`,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${user.token}`,

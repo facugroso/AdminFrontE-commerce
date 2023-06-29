@@ -44,7 +44,7 @@ function Login() {
 
     const response = await axios({
       method: "POST",
-      url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/tokenAdmin`,
+      url: `${import.meta.env.VITE_API_URL}/tokenAdmin`,
       data: {
         email: emailValue,
         password: passwordValue,

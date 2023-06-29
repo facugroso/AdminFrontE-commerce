@@ -17,7 +17,7 @@ function Users() {
     async function getUserData() {
       const response = await axios({
         method: "get",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users`,
+        url: `${import.meta.env.VITE_API_URL}/users`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -31,7 +31,7 @@ function Users() {
     async function getAdmins() {
       const response = await axios({
         method: "get",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin`,
+        url: `${import.meta.env.VITE_API_URL}/admin`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

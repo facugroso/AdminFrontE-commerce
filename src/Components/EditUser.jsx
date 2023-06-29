@@ -21,7 +21,7 @@ function EditUser() {
     async function getUser() {
       const response = await axios({
         method: "get",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users/${params.id}`,
+        url: `${import.meta.env.VITE_API_URL}/users/${params.id}`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -42,7 +42,7 @@ function EditUser() {
 
       const response = await axios({
         method: "PATCH",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users/${params.id}`,
+        url: `${import.meta.env.VITE_API_URL}/users/${params.id}`,
         data: {
           firstname,
           lastname,
@@ -92,7 +92,7 @@ function EditUser() {
 
       const response = await axios({
         method: "DELETE",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/users/${params.id}`,
+        url: `${import.meta.env.VITE_API_URL}/users/${params.id}`,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

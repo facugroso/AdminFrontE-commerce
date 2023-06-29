@@ -19,7 +19,7 @@ function AddAdmin() {
     try {
       const response = await axios({
         method: "POST",
-        url: `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/admin`,
+        url: `${import.meta.env.VITE_API_URL}/admin`,
         data: {
           firstname,
           lastname,
