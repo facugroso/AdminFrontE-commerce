@@ -114,6 +114,7 @@ function EditCategory() {
       {" "}
       {category && (
         <section className="container-fluid w-50 px-4">
+          {console.log(category)}
           <div className="d-flex justify-content-between align-items-center">
             <div>
               <h2>Edit Category</h2>
@@ -149,6 +150,15 @@ function EditCategory() {
                   id="categoryimage"
                   onChange={(event) => setCategoryimg(event.target.files[0])}
                 />
+                <div className="d-flex justify-content-center">
+                  <img
+                    style={{ width: "60%" }}
+                    src={`${import.meta.env.VITE_IMAGE_CLOUD_DIRECTION}/${
+                      category.image
+                    }`}
+                    alt={`${category.name} image`}
+                  />
+                </div>
               </div>
 
               <div className="mt-4 mb-3 text-center">

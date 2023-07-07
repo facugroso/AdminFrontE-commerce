@@ -171,6 +171,7 @@ function Categories() {
             <div className="form-group mb-3">
               <label>Image</label>
               <input
+                name="categoryimage"
                 className="form-control-file"
                 type="file"
                 placeholder="Image path"
